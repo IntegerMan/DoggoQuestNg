@@ -30,10 +30,10 @@ Image created in [Trizbort](https://github.com/genstein/trizbort)
 
 I undertook an [exercise to use event modeling for game design](https://killalldefects.com/2020/02/01/game-design-with-event-modeling/) and the resulting graphic is included below:
 
-![Event Modeling Diagram](images/EventModeling.png)
+![Event Modeling Diagram](Images/EventModeling.png)
 
 ### Puzzle Dependency Diagram
 
 Additionally, I represented significant story beats in a [puzzle dependency diagram](http://thewebsiteisdown.com/twidblog/puzzle-dependency-graph-primer/) which is included below (Warning: Contains spoilers):
 
-![Puzzle Dependency Diagram](images/Dependencies.png)
+![Puzzle Dependency Diagram](Images/Dependencies.png)

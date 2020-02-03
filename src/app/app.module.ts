@@ -9,6 +9,7 @@ import { PlayerCommandComponent } from './player-command/player-command.componen
 import { CommandEntryComponent } from './command-entry/command-entry.component';
 import { GameOverComponent } from './game-over/game-over.component';
 import { StoryTextComponent } from './story-text/story-text.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { StoryTextComponent } from './story-text/story-text.component';
     StoryTextComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -46,11 +46,11 @@ The application is a small one and only composed of a few components. Let's take
 
 The game's components are:
 
-- App.Component - Main container for the application
-- Header.Component - Contains the game title and high level game information, including the score
-- Footer.Component - Holds the command entry component and the game over component
-- StoryView.Component - Contains the game's narrative. New entries will be added to the bottom
-- CommandEntry.Component - Allows the player to enter in game commands and submit them
-- GameOver.Component - Shown when the game has ended and allows the user to restart the game
-- PlayerCommand.Component - Represents something the player typed into the engine at one point and is now part of the story
-- StoryText.Component - An individual paragraph within the game's narrative. Housed inside the StoryView.Component
+- `App.Component` - Main container for the application
+- `Header.Component` - Contains the game title and high level game information, including the score
+- `Footer.Component` - Holds the command entry component and the game over component
+- `StoryView.Component` - Contains the game's narrative. New entries will be added to the bottom
+- `CommandEntry.Component` - Allows the player to enter in game commands and submit them
+- `GameOver.Component` - Shown when the game has ended and allows the user to restart the game
+- `PlayerCommand.Component` - Represents something the player typed into the engine at one point and is now part of the story
+- `StoryText.Component` - An individual paragraph within the game's narrative. Housed inside the StoryView.Component

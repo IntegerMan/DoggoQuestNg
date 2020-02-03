@@ -1,6 +1,6 @@
 # Doggo Quest
 
-Doggo Quest is small an Angular Interactive Fiction game created by Matt Eland as a teaching exercise to discuss various topics:
+Doggo Quest is small an Angular Interactive Fiction game created by [Matt Eland](https://twitter.com/integerman) as a teaching exercise to discuss various topics:
 
 - [Event Modeling](https://killalldefects.com/2020/02/01/game-design-with-event-modeling/)
 - Angular

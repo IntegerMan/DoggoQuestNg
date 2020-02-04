@@ -1,9 +1,9 @@
-<div style="height: 100%;">
+<div class="container full-height" >
   <app-header></app-header>
 
-  <div style="margin: 1rem; height: 80%;">
-    <mat-card style="height: 100%;">
-      <mat-card-content style="height: 82%;">
+  <div style="padding: 0.5rem;">
+    <mat-card (window:resize)="onResize()" [style.height.px]="StoryCardHeight" class="full-height">
+      <mat-card-content #scrollMe class="full-height scroll-container">
         <app-story-view></app-story-view>
       </mat-card-content>
       <mat-card-actions>

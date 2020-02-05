@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-player-command',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./player-command.component.scss']
 })
 export class PlayerCommandComponent implements OnInit {
+
+  @Input()
+  public Text: string;
 
   constructor() { }
 

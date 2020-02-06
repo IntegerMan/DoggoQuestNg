@@ -15,6 +15,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
+import { StoryEntryComponent } from './story-entry/story-entry.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {MatIconModule} from '@angular/material/icon';
     PlayerCommandComponent,
     CommandEntryComponent,
     GameOverComponent,
-    StoryTextComponent
+    StoryTextComponent,
+    StoryEntryComponent
   ],
   imports: [
     BrowserModule,

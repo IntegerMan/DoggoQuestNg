@@ -8,7 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input()
-  public Score: number = 0;
+  public Score = 0;
 
   constructor() { }
 

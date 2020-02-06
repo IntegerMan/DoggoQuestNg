@@ -13,10 +13,10 @@ export class AppComponent implements OnInit {
 
   @ViewChild('scrollMe', { read: ViewContainerRef, static: true }) scrollContainer;
 
-  public StoryCardHeight: number;
+  public ContentHeight: number;
 
   public onResize(): void {
-    this.StoryCardHeight = window.innerHeight - 200;
+    this.ContentHeight = window.innerHeight - 180;
   }
 
   public ngOnInit(): void {

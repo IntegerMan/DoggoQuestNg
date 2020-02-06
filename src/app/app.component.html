@@ -1,14 +1,13 @@
 <div class="container full-height" >
   <app-header></app-header>
 
-  <div style="padding: 0.5rem;">
-    <mat-card (window:resize)="onResize()" [style.height.px]="StoryCardHeight" class="full-height" style="padding: 0.25rem;">
-      <mat-card-content #scrollMe class="full-height scroll-container" style="padding-left: 1rem; padding-right: 1rem;">
+  <div (window:resize)="onResize()" [style.height.px]="ContentHeight">
+    <mat-card class="full-height story-area">
+      <mat-card-content #scrollMe class="full-height scroll-container">
         <app-story-view></app-story-view>
       </mat-card-content>
-      <mat-card-actions>
-        <app-footer></app-footer>
-      </mat-card-actions>
     </mat-card>
   </div>
+
+  <app-footer class="footer"></app-footer>
 </div>

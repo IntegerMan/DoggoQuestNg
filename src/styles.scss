@@ -36,6 +36,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   min-height: 100%;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
 .scroll-container {
   overflow-y: auto;
 }
@@ -47,4 +55,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 ::-webkit-scrollbar-thumb {
   background-color: #616161  ;
+}
+
+.text-story {
+  color: #cdcdcd;
+}
+
+.text-system {
+  color: #eeeeff;
+  font-weight: 400;
+}
+
+.text-warn {
+  color: #ffeb3b;
+}
+
+.text-command {
+  color: #18ffff  ;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }

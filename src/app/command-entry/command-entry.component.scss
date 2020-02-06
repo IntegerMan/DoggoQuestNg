@@ -1,3 +1,10 @@
-.full-width {
-  width: 100%;
+.command-area {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.5rem;
+}
+
+.command-area input {
+  padding-bottom: 0 !important;
 }

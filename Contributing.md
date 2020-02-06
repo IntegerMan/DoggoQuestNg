@@ -1,0 +1,1 @@
+This project is currently under active development for a series of articles and talks and I am unlikely to accept pull requests until the series is over. If you see this message in June of 2020 or beyond, please contact me to change it as I may simply have forgotten.

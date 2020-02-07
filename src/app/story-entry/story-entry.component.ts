@@ -12,6 +12,7 @@ export class StoryEntryComponent implements OnInit {
   @Input()
   public Entry: StoryEntry;
 
+  // Alias the enum so we can refer to its values in the component
   public Entries = StoryEntryType;
 
   constructor() { }

@@ -1,17 +1,28 @@
-import {Component, ElementRef, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  AfterContentChecked,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {StoryService} from './story.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
+  private entrySub: Subscription;
+  private scrollCount = 0;
 
-  constructor() {
+  constructor(private storyService: StoryService) {
     this.onResize();
   }
 
-  @ViewChild('scrollMe', { read: ViewContainerRef, static: true }) scrollContainer;
+  @ViewChild('scrollMe', { static: false }) scrollContainer;
+  @ViewChild('bottomOfScroll', { static: false }) scrollBottom;
 
   public ContentHeight: number;
 
@@ -21,11 +32,26 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
     this.scrollToBottom();
+    this.entrySub = this.storyService.ReadyForInput.subscribe(_ => this.scrollCount = 2);
+  }
+
+  ngOnDestroy() {
+    if (this.entrySub) {
+      this.entrySub.unsubscribe();
+      this.entrySub = null;
+    }
   }
 
   scrollToBottom(): void {
     if (this.scrollContainer && this.scrollContainer.nativeElement) {
-      this.scrollContainer.nativeElement.scrollTop = this.scrollContainer.nativeElement.scrollHeight;
+      this.scrollBottom.nativeElement.scrollIntoView({behavior: 'smooth' });
+    }
+  }
+
+  ngAfterContentChecked(): void {
+    if (this.scrollCount > 0) {
+      this.scrollCount--;
+      this.scrollToBottom();
     }
   }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {StoryService} from '../story.service';
 
 @Component({
   selector: 'app-command-entry',
@@ -8,16 +9,13 @@ import { Component, OnInit } from '@angular/core';
 export class CommandEntryComponent implements OnInit {
   public Command: string;
 
-  constructor() { }
+  constructor(private  storyService: StoryService) { }
 
   ngOnInit() {
   }
 
   submitCommand() {
-    // TODO: Further in this series this will call to something else instead of logging to console
-    if (console && console.log) {
-      console.log(`Command entered: ${this.Command}`);
-    }
+    this.storyService.handlePlayerInput(this.Command);
 
     // Clear the input's text for next time
     this.Command = '';

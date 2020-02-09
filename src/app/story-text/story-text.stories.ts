@@ -5,11 +5,11 @@ export default {
   component: StoryTextComponent,
 };
 
-
 export const StoryTextStories = () => ({
   component: StoryTextComponent,
   props: {
-    Text: 'This story illustrates sample response from the game engine. It will be shown in other components to give the player information on what just happened in the story.'
+    Text: 'This story illustrates sample response from the game engine. It will be shown in other components ' +
+      'to give the player information on what just happened in the story.'
   },
 });
 

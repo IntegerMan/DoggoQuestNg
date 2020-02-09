@@ -46,3 +46,5 @@ testem.log
 Thumbs.db
 
 Images/EventModelingSocial.png
+
+storybook-static/

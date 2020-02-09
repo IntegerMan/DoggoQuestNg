@@ -3,12 +3,7 @@ import {AppModule} from '../app.module';
 import {PlayerCommandComponent} from './player-command.component';
 
 storiesOf('PlayerCommand', module)
-  .addDecorator(
-    moduleMetadata({
-      imports: [
-        AppModule
-      ],
-    }))
+  .addDecorator(moduleMetadata({ imports: [ AppModule ]}))
   .add('PlayerCommand', () => ({
     component: PlayerCommandComponent,
     props: {

@@ -5,16 +5,23 @@ import {AppModule} from '../app.module';
 import {StoryEntryComponent} from './story-entry.component';
 
 storiesOf('StoryEntry', module)
-  .addDecorator(
-    moduleMetadata({
-      imports: [
-        AppModule
-      ],
-    }))
+  .addDecorator(moduleMetadata({ imports: [ AppModule ]}))
   .add('PlayerCommand', () => ({
     component: StoryEntryComponent,
     props: {
       Entry: new StoryEntry(StoryEntryType.PlayerCommand, 'This is a player command')
+    },
+  }))
+  .add('SystemText', () => ({
+    component: StoryEntryComponent,
+    props: {
+      Entry: new StoryEntry(StoryEntryType.SystemText, 'This is some System Text')
+    },
+  }))
+  .add('Error', () => ({
+    component: StoryEntryComponent,
+    props: {
+      Entry: new StoryEntry(StoryEntryType.CommandError, 'This is an error or warning message')
     },
   }))
   .add('StoryNarrative', () => ({

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {StoryService} from '../story.service';
 
 @Component({
@@ -6,15 +6,13 @@ import {StoryService} from '../story.service';
   templateUrl: './command-entry.component.html',
   styleUrls: ['./command-entry.component.scss']
 })
-export class CommandEntryComponent implements OnInit {
+export class CommandEntryComponent {
   public Command: string;
 
   constructor(private  storyService: StoryService) { }
 
-  ngOnInit() {
-  }
-
-  submitCommand() {
+  public submitCommand(): void {
+    // Send the event on to the service for processing
     this.storyService.handlePlayerInput(this.Command);
 
     // Clear the input's text for next time

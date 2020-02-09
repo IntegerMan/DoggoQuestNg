@@ -5,6 +5,7 @@ export default {
   component: StoryTextComponent,
 };
 
+
 export const StoryTextStories = () => ({
   component: StoryTextComponent,
   props: {

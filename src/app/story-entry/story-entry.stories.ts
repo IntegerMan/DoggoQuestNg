@@ -1,19 +1,25 @@
+import {moduleMetadata, storiesOf} from '@storybook/angular';
 import {StoryEntry} from '../../Model/StoryEntry';
 import {StoryEntryType} from '../../Model/StoryEntryType';
+import {AppModule} from '../app.module';
 import {StoryEntryComponent} from './story-entry.component';
 
-export default {
-  title: 'StoryEntry',
-  component: StoryEntryComponent,
-};
-
-export const StoryEntryStories = () => ({
-  component: StoryEntryComponent,
-  props: {
-    Entry: new StoryEntry(StoryEntryType.PlayerCommand, 'This is a player command')
-  },
-});
-
-StoryEntryStories.story = {
-  title: 'StoryEntry',
-};
+storiesOf('StoryEntry', module)
+  .addDecorator(
+    moduleMetadata({
+      imports: [
+        AppModule
+      ],
+    }))
+  .add('PlayerCommand', () => ({
+    component: StoryEntryComponent,
+    props: {
+      Entry: new StoryEntry(StoryEntryType.PlayerCommand, 'This is a player command')
+    },
+  }))
+  .add('StoryNarrative', () => ({
+    component: StoryEntryComponent,
+    props: {
+      Entry: new StoryEntry(StoryEntryType.StoryNarrative, 'This is story narrative')
+    },
+  }));

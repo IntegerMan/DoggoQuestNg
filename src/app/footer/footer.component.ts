@@ -7,7 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class FooterComponent implements OnInit {
   @Input()
-  public GameOver: boolean = false;
+  public GameOver = false;
 
   constructor() { }
 

@@ -3,7 +3,7 @@
 
   <div (window:resize)="onResize()" [style.height.px]="ContentHeight">
     <mat-card class="full-height story-area">
-      <mat-card-content #scrollMe class="full-height scroll-container" >
+      <mat-card-content #scrollMe class="full-height scroll-container" tabindex="0" aria-live="polite">
         <app-story-view></app-story-view>
         <div #bottomOfScroll></div>
       </mat-card-content>

@@ -1,3 +1,4 @@
+import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StoryEntry} from '../../Model/StoryEntry';
@@ -16,7 +17,8 @@ export class StoryViewComponent implements OnInit, OnDestroy {
 
   private entrySub: Subscription;
 
-  constructor(private storyService: StoryService) {
+  constructor(private storyService: StoryService,
+              private liveAnnouncer: LiveAnnouncer) {
     this.Entries.push(new StoryEntry(StoryEntryType.SystemText, 'Welcome to Doggo Quest!'));
     this.Entries.push(new StoryEntry(StoryEntryType.SystemText,
       'Doggo Quest is an Interactive Fiction game created by Matt Eland (@IntegerMan)'));
@@ -30,7 +32,7 @@ export class StoryViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.entrySub = this.storyService.EntryAdded.subscribe(entry => this.Entries.push(entry));
+    this.entrySub = this.storyService.EntryAdded.subscribe(entry => this.onEntryAdded(entry));
   }
 
   ngOnDestroy() {
@@ -40,4 +42,17 @@ export class StoryViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  private onEntryAdded(entry: StoryEntry) {
+    this.log('Entry added', entry);
+    this.Entries.push(entry);
+
+    // NOTE: This will not notify of rapid-fire entries
+    this.liveAnnouncer.announce(entry.Text).then(_ => this.log(`\'${entry.Text}\' announced`));
+  }
+
+  private log(message: string, obj?: any) {
+    if (console && console.debug) {
+      console.debug(message, obj);
+    }
+  }
 }

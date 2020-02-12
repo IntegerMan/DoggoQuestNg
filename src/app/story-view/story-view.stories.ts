@@ -3,9 +3,11 @@ import {StoryEntry} from '../../Model/StoryEntry';
 import {StoryEntryType} from '../../Model/StoryEntryType';
 import {AppModule} from '../app.module';
 import {StoryViewComponent} from './story-view.component';
+import { withA11y } from '@storybook/addon-a11y';
 
 storiesOf('StoryView', module)
   .addDecorator(moduleMetadata({ imports: [ AppModule ]}))
+  .addDecorator(withA11y)
   .add('SampleText', () => ({
     component: StoryViewComponent,
     props: {

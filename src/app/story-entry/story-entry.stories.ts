@@ -4,10 +4,12 @@ import {StoryEntry} from '../../Model/StoryEntry';
 import {StoryEntryType} from '../../Model/StoryEntryType';
 import {AppModule} from '../app.module';
 import {StoryEntryComponent} from './story-entry.component';
+import { withA11y } from '@storybook/addon-a11y';
 
 storiesOf('StoryEntry', module)
   .addDecorator(moduleMetadata({ imports: [ AppModule ]}))
   .addDecorator(withKnobs)
+  .addDecorator(withA11y)
   .add('Configurable', () => ({
     component: StoryEntryComponent,
     props: {

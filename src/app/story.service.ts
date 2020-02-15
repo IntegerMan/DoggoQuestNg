@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {StoryEntry} from '../Model/StoryEntry';
 import {StoryEntryType} from '../Model/StoryEntryType';
+import nlp from 'compromise';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,11 @@ export class StoryService {
   constructor() { }
 
   public handlePlayerInput(text: string): void {
+    const doc = nlp(text);
+
     // Log it if the console is available (won't be in all browsers)
     if (console && console.log) {
-      console.log(`Command entered: ${text}`);
+      console.log(`Command entered: ${text}`, doc.termList());
     }
 
     // Emit an event containing the player's command so we have a log of it in the UI

@@ -11,6 +11,7 @@ import { CommandEntryComponent } from './command-entry/command-entry.component';
 import { GameOverComponent } from './game-over/game-over.component';
 import { StoryTextComponent } from './story-text/story-text.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDividerModule} from '@angular/material';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
@@ -28,7 +29,7 @@ import { StoryEntryComponent } from './story-entry/story-entry.component';
     CommandEntryComponent,
     GameOverComponent,
     StoryTextComponent,
-    StoryEntryComponent
+    StoryEntryComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +39,7 @@ import { StoryEntryComponent } from './story-entry/story-entry.component';
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
+    MatDividerModule,
     FormsModule
   ],
   providers: [],

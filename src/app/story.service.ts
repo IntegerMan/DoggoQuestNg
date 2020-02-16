@@ -1,8 +1,10 @@
 import {EventEmitter, Injectable} from '@angular/core';
+import {Room} from '../Model/Room';
 import {Sentence} from '../Model/Sentence';
 import {StoryEntry} from '../Model/StoryEntry';
 import {StoryEntryType} from '../Model/StoryEntryType';
 import {ParserService} from './parser.service';
+import {RoomService} from './room.service';
 import {VerbService} from './verb.service';
 
 @Injectable({
@@ -12,16 +14,22 @@ export class StoryService {
 
   public EntriesAdded: EventEmitter<StoryEntry[]> = new EventEmitter<StoryEntry[]>();
 
-  constructor(private parser: ParserService, private verbs: VerbService) {
+  constructor(private parser: ParserService, private verbs: VerbService, private rooms: RoomService) {
   }
 
   public get initialEntries(): StoryEntry[] {
-    return [new StoryEntry(StoryEntryType.SystemText,
-      'Welcome to Doggo Quest!'),
-            new StoryEntry(StoryEntryType.SystemText,
-      'Doggo Quest is an Interactive Fiction game created by Matt Eland (@IntegerMan)'),
-            new StoryEntry(StoryEntryType.SystemText,
-      'This game is implemented in Angular / TypeScript using Angular Material for styling with Compromise-NLP for text parsing.')];
+    const entries = [
+      new StoryEntry(StoryEntryType.SystemText, 'Welcome to Doggo Quest!'),
+      new StoryEntry(StoryEntryType.SystemText,
+        'Doggo Quest is an Interactive Fiction game created by Matt Eland (@IntegerMan)'),
+      new StoryEntry(StoryEntryType.SystemText,
+        'This game is implemented in Angular / TypeScript using Angular Material for styling with Compromise-NLP for text parsing.'),
+      new StoryEntry(StoryEntryType.Divider, '')
+    ];
+
+    this.rooms.describe(Room.InCrate, entries, true);
+
+    return entries;
   }
 
   public handlePlayerInput(text: string): void {

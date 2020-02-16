@@ -2,5 +2,7 @@
   <app-story-text *ngSwitchCase="Entries.StoryNarrative" [Text]="Entry.Text"></app-story-text>
   <app-player-command *ngSwitchCase="Entries.PlayerCommand" [Text]="Entry.Text"></app-player-command>
   <p *ngSwitchCase="Entries.SystemText" class="text-system">{{Entry.Text}}</p>
+  <p *ngSwitchCase="Entries.RoomName" class="text-room-name">{{Entry.Text}}</p>
+  <mat-divider *ngSwitchCase="Entries.Divider"></mat-divider>
   <p class="text-warn" *ngSwitchDefault>{{Entry.Text}}</p>
 </div>

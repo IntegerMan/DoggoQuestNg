@@ -2,7 +2,6 @@ import {LiveAnnouncer} from '@angular/cdk/a11y';
 import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StoryEntry} from '../../Model/StoryEntry';
-import {StoryEntryType} from '../../Model/StoryEntryType';
 import {LoggingService} from '../logging.service';
 import {StoryService} from '../story.service';
 

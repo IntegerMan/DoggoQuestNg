@@ -3,6 +3,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {StoryEntry} from '../../Model/StoryEntry';
 import {StoryEntryType} from '../../Model/StoryEntryType';
+import {LoggingService} from '../logging.service';
 import {StoryService} from '../story.service';
 
 @Component({
@@ -18,21 +19,17 @@ export class StoryViewComponent implements OnInit, OnDestroy {
   private entrySub: Subscription;
 
   constructor(private storyService: StoryService,
-              private liveAnnouncer: LiveAnnouncer) {
-    this.Entries.push(new StoryEntry(StoryEntryType.SystemText, 'Welcome to Doggo Quest!'));
-    this.Entries.push(new StoryEntry(StoryEntryType.SystemText,
-      'Doggo Quest is an Interactive Fiction game created by Matt Eland (@IntegerMan)'));
-    this.Entries.push(new StoryEntry(StoryEntryType.SystemText,
-      'This game is implemented in Angular / TypeScript using Angular Material for styling.'));
-    this.Entries.push(new StoryEntry(StoryEntryType.PlayerCommand, 'Say Hello World'));
-    this.Entries.push(new StoryEntry(StoryEntryType.StoryNarrative,
-      'You cannot talk because - follow my logic here - YOU ARE A DOG!'));
-    this.Entries.push(new StoryEntry(StoryEntryType.StoryNarrative,
-      'A small \'ruff\' emerges from your mouth in protest to this fact, however.'));
+              private liveAnnouncer: LiveAnnouncer,
+              private logger: LoggingService) {
+    const initialEntries = storyService.initialEntries;
+
+    for (const entry of initialEntries) {
+      this.Entries.push(entry);
+    }
   }
 
   ngOnInit() {
-    this.entrySub = this.storyService.EntryAdded.subscribe(entry => this.onEntryAdded(entry));
+    this.entrySub = this.storyService.EntriesAdded.subscribe(entries => this.onEntryAdded(entries));
   }
 
   ngOnDestroy() {
@@ -42,17 +39,17 @@ export class StoryViewComponent implements OnInit, OnDestroy {
     }
   }
 
-  private onEntryAdded(entry: StoryEntry) {
-    this.log('Entry added', entry);
-    this.Entries.push(entry);
+  private onEntryAdded(entries: StoryEntry[]) {
+    this.logger.log('Entries added', entries);
+
+    // Add the entries to the UI and build a single string to send to the live announcer
+    let message = '';
+    for (const entry of entries) {
+      this.Entries.push(entry);
+      message += entry.Text + '\r\n';
+    }
 
     // NOTE: This will not notify of rapid-fire entries
-    this.liveAnnouncer.announce(entry.Text).then(_ => this.log(`\'${entry.Text}\' announced`));
-  }
-
-  private log(message: string, obj?: any) {
-    if (console && console.debug) {
-      console.debug(message, obj);
-    }
+    this.liveAnnouncer.announce(message).then(_ => this.logger.log(`\'${message}\' announced`));
   }
 }

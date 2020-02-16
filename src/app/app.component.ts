@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterContentChecked {
 
   public ngOnInit(): void {
     this.scrollToBottom();
-    this.entrySub = this.storyService.ReadyForInput.subscribe(_ => this.scrollCount = 2);
+    this.entrySub = this.storyService.EntriesAdded.subscribe(_ => this.scrollCount = 2);
   }
 
   ngOnDestroy() {

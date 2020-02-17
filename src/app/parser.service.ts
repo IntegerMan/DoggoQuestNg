@@ -20,6 +20,7 @@ export class ParserService {
 
     // Construct the sentence
     const sentence = this.buildSentence(terms);
+    sentence.text = text;
 
     // Log and return
     this.logger.log(`Constructed sentence`, sentence);
@@ -34,9 +35,51 @@ export class ParserService {
     let word: Word;
     for (const term of terms) {
       word = new Word(term);
+
+      this.addMissingTags(word);
+
       sentence.addWord(word);
     }
 
+    // Now that we have our words, let's start linking them together
+    this.linkSentence(sentence);
+
     return sentence;
+  }
+
+  private linkSentence(sentence: Sentence) {
+    const verb: Word = sentence.verbWord;
+    let lastNoun: Word = null;
+
+    const reversedSentence = sentence.words.slice().reverse();
+    for (const word of reversedSentence) {
+      if (word.isNoun) {
+        lastNoun = word;
+        continue;
+      }
+
+      if (word.isVerb) {
+        continue;
+      }
+
+      if (word.isAdverb) {
+        word.parent = verb;
+        if (verb) {
+          verb.addChild(word);
+        }
+      } else {
+        word.parent = lastNoun;
+        if (lastNoun) {
+          lastNoun.addChild(word);
+        }
+      }
+    }
+  }
+
+  private addMissingTags(word: Word): void {
+    switch (word.reduced) {
+      case 'open':
+        word.addTag('Verb');
+    }
   }
 }

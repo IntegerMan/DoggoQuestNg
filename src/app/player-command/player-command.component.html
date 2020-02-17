@@ -1,6 +1,12 @@
-<p class="text-command">
-  <code>
-    <mat-icon inline="true">chevron_right</mat-icon>
-    {{Text}}
-  </code>
-</p>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <p class="text-command">
+      <code>
+        <mat-icon inline="true">chevron_right</mat-icon>
+        {{Text}}
+      </code>
+    </p>
+  </mat-expansion-panel-header>
+  <app-word *ngFor="let word of Sentence.rootWords" [Word]="word">
+  </app-word>
+</mat-expansion-panel>

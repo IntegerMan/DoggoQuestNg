@@ -11,13 +11,15 @@ import { CommandEntryComponent } from './command-entry/command-entry.component';
 import { GameOverComponent } from './game-over/game-over.component';
 import { StoryTextComponent } from './story-text/story-text.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDividerModule} from '@angular/material';
+import {MatDividerModule, MatExpansionModule} from '@angular/material';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatCardModule} from '@angular/material/card';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { StoryEntryComponent } from './story-entry/story-entry.component';
+import { WordComponent } from './word/word.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { StoryEntryComponent } from './story-entry/story-entry.component';
     GameOverComponent,
     StoryTextComponent,
     StoryEntryComponent,
+    WordComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,9 @@ import { StoryEntryComponent } from './story-entry/story-entry.component';
     MatToolbarModule,
     MatIconModule,
     MatDividerModule,
-    FormsModule
+    FormsModule,
+    MatChipsModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

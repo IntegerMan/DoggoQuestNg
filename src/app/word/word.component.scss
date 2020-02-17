@@ -1,0 +1,23 @@
+.word-tags {
+  position: relative;
+  left: 1rem;
+}
+
+.tag {
+  font-size: 75%;
+  padding: 0 0.25rem;
+  margin: 4px;
+  border-radius: 16px;
+}
+
+.tag.tag-verb {
+  background-color: red !important;
+}
+
+.tag.tag-noun {
+  background-color: darkblue !important;
+}
+
+.child-container {
+  margin-left: 1rem;
+}

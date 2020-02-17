@@ -1,24 +1,60 @@
 import {Word} from './Word';
 
 export class Sentence {
-  private words: Word[] = [];
+  public text: string;
 
-  constructor() {
-  }
+  constructor() {  }
 
-  public get verb(): string {
+
+  public get verbWord(): Word {
     if (this.words.length <= 0 || !this.words[0].isVerb) {
       return undefined;
     }
 
-    return this.words[0].reduced;
+    return this.words[0];
+  }
+
+  public get verb(): string {
+    const word = this.verbWord;
+
+    if (word) {
+      return word.reduced;
+    }
+
+    return undefined;
+  }
+
+  public get target(): string | undefined {
+    if (this.words.length > 1) {
+      for (const word of this.words) {
+        if (word.isNoun) {
+          return word.reduced;
+        }
+      }
+    }
+
+    return undefined;
+  }
+
+  public words: Word[] = [];
+
+  public get rootWords(): Word[] {
+    const roots: Word[] = [];
+
+    for (const word of this.words) {
+      if (!word.parent) {
+        roots.push(word);
+      }
+    }
+
+    return roots;
   }
 
   addWord(word: Word) {
     this.words.push(word);
   }
 
-  validate(): string | undefined {
+  public validate(): string | undefined {
     if (this.words.length <= 0) {
       return 'I\'m sorry, did you want to do something?';
     }

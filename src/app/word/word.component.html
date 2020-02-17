@@ -1,0 +1,9 @@
+<div>
+  <span>{{Word.text}}</span>
+    <mat-chip class="tag" [class.tag-verb]="tag === 'Verb'" [class.tag-noun]="tag === 'Noun'"
+              *ngFor="let tag of Word.tagNames" color="primary" selected>{{tag}}</mat-chip>
+</div>
+<div *ngIf="Word.hasChildren" class="child-container">
+  <app-word *ngFor="let word of Word.children" [Word]="word"></app-word>
+</div>
+

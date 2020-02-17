@@ -63,7 +63,12 @@ export class Word {
     this.tags[tagName] = true;
   }
 
+  public removeTag(tagName: string): void {
+    delete this.tags[tagName];
+  }
+
   public addChild(word: Word): void {
     this.children.push(word);
   }
+
 }

@@ -36,7 +36,7 @@ export class ParserService {
     for (const term of terms) {
       word = new Word(term);
 
-      this.addMissingTags(word);
+      this.adjustTags(word);
 
       sentence.addWord(word);
     }
@@ -76,10 +76,15 @@ export class ParserService {
     }
   }
 
-  private addMissingTags(word: Word): void {
+  private adjustTags(word: Word): void {
     switch (word.reduced) {
       case 'open':
         word.addTag('Verb');
+    }
+
+    // Possessive nouns should be treated as adjectives
+    if (word.isNoun && word.hasTag('Possessive')) {
+      word.removeTag('Noun');
     }
   }
 }

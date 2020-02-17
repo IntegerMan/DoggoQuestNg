@@ -63,6 +63,10 @@ export class Sentence {
       return 'Your command must start with a verb. For example: \'Bark at the squirrel\'';
     }
 
+    if (this.words.filter(w => w.isVerb).length > 1) {
+      return 'Your command cannot have more than one verb';
+    }
+
     return undefined;
   }
 }

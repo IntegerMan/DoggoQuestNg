@@ -80,6 +80,17 @@ export class ParserService {
     switch (word.reduced) {
       case 'open':
         word.addTag('Verb');
+        break;
+      case 'crate':
+        word.removeTag('Verb').addTag('Noun');
+        break;
+      case 'on':
+      case 'under':
+      case 'below':
+      case 'behind':
+      case 'above':
+        word.addTag('Preposition');
+        break;
     }
 
     // Possessive nouns should be treated as adjectives

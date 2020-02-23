@@ -5,7 +5,6 @@ export class Sentence {
 
   constructor() {  }
 
-
   public get verbWord(): Word {
     if (this.words.length <= 0 || !this.words[0].isVerb) {
       return undefined;

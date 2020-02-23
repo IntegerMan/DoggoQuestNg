@@ -59,16 +59,19 @@ export class Word {
     return this.tags[tagName];
   }
 
-  public addTag(tagName: string): void {
+  public addTag(tagName: string): Word {
     this.tags[tagName] = true;
+    return this;
   }
 
-  public removeTag(tagName: string): void {
+  public removeTag(tagName: string): Word {
     delete this.tags[tagName];
+    return this;
   }
 
-  public addChild(word: Word): void {
+  public addChild(word: Word): Word {
     this.children.push(word);
+    return this;
   }
 
 }

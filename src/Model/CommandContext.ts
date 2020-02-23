@@ -1,6 +1,6 @@
 import {RoomService} from '../app/room.service';
 import {Room} from './World/Room';
-import {Sentence} from './Sentence';
+import {Sentence} from './Parsing/Sentence';
 import {StoryEntry} from './StoryEntry';
 import {StoryEntryType} from './StoryEntryType';
 

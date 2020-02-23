@@ -1,4 +1,4 @@
-import {Word} from '../../Model/Word';
+import {Word} from '../../Model/Parsing/Word';
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({

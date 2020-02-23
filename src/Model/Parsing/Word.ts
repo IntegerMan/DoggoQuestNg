@@ -1,10 +1,16 @@
 import nlp from 'compromise';
+import {GameObject} from '../World/GameObject';
 
 export class Word {
   readonly tags: Record<string, boolean>;
 
   public parent: Word;
   public children: Word[] = [];
+
+  /**
+   * The object in the game this world has been mapped to
+   */
+  public target: GameObject | undefined;
 
   constructor(term: nlp.Term) {
     this.text = term.text;

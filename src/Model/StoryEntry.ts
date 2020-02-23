@@ -1,5 +1,5 @@
 import {StoryEntryType} from './StoryEntryType';
-import {Sentence} from './Sentence';
+import {Sentence} from './Parsing/Sentence';
 
 export class StoryEntry {
   constructor(EntryType: StoryEntryType, Text: string, sentence?: Sentence) {

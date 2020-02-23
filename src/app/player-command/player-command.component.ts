@@ -1,4 +1,4 @@
-import {Sentence} from '../../Model/Sentence';
+import {Sentence} from '../../Model/Parsing/Sentence';
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({

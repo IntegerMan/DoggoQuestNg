@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {Sentence} from '../Model/Sentence';
-import {Word} from '../Model/Word';
+import {Sentence} from '../Model/Parsing/Sentence';
+import {Word} from '../Model/Parsing/Word';
 import {LoggingService} from './logging.service';
 import nlp from 'compromise';
 

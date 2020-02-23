@@ -6,6 +6,7 @@ import {StoryEntryType} from '../Model/StoryEntryType';
 import {ParserService} from './parser.service';
 import {RoomService} from './room.service';
 import {VerbService} from './verb.service';
+import {WorldService} from './world.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,10 @@ export class StoryService {
 
   public EntriesAdded: EventEmitter<StoryEntry[]> = new EventEmitter<StoryEntry[]>();
 
-  constructor(private parser: ParserService, private verbs: VerbService, private rooms: RoomService) {
+  constructor(private parser: ParserService,
+              private verbs: VerbService,
+              private rooms: RoomService,
+              private world: WorldService) {
   }
 
   public get initialEntries(): StoryEntry[] {
@@ -37,6 +41,8 @@ export class StoryService {
     const entries: StoryEntry[] = [];
     const sentence = this.parser.parse(text);
     const context = new CommandContext(entries, sentence, this.rooms);
+
+    this.world.mapNouns(context);
 
     // Add an event containing the player's command so we have a log of it in the UI
     context.addPlayerCommand();

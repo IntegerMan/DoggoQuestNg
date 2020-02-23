@@ -2,8 +2,6 @@ import {Injectable} from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
 import {GameRoom} from '../Model/World/GameRoom';
 import {Room} from '../Model/World/Room';
-import {StoryEntry} from '../Model/StoryEntry';
-import {StoryEntryType} from '../Model/StoryEntryType';
 
 @Injectable({
   providedIn: 'root'
@@ -21,16 +19,22 @@ export class RoomService {
     },
     objects: [
       {
-        name: 'Door',
+        name: 'door',
         description: 'It is just a metal door to the crate.',
         smell: 'It smells like metal.',
         taste: 'It tastes smooth, cold, and boring.'
       },
       {
-        name: 'Blanket',
+        name: 'blanket',
         description: 'The blanket is soft and snuggly. You like it.',
         smell: 'It smells like you!',
         taste: 'It\'s not that interesting to taste. You lick it sometimes while you sleep in your crate, but it just tastes like blanket.'
+      },
+      {
+        name: 'crate',
+        description: 'The crate is big enough for you to fit comfortably in and not too much bigger. You do not like it in here.',
+        smell: 'It smells like you!',
+        taste: 'It\'s plastic and boring. I don\'t want to lick that.'
       }
     ]
   };
@@ -45,10 +49,6 @@ export class RoomService {
     } else {
       context.addError('No description exists for room ' + room);
     }
-  }
-
-  private text(message: string): StoryEntry {
-    return new StoryEntry(StoryEntryType.StoryNarrative, message);
   }
 
   public getRoom(room: Room): GameRoom {
@@ -81,7 +81,7 @@ export class RoomService {
       case Room.OnCouch:
         return 'Living Room (On Couch)';
       default:
-        return 'No description exists for ' + room;
+        return `No description exists for ${room}`;
     }
   }
 

@@ -1,5 +1,5 @@
 import {RoomService} from '../app/room.service';
-import {Room} from './Room';
+import {Room} from './World/Room';
 import {Sentence} from './Sentence';
 import {StoryEntry} from './StoryEntry';
 import {StoryEntryType} from './StoryEntryType';
@@ -13,7 +13,7 @@ export class CommandContext {
   }
 
   public describeCurrentRoom(isFullDescribe: boolean): void {
-    this.rooms.describe(this.currentRoom, this.entries, isFullDescribe);
+    this.rooms.describe(this.currentRoom, this, isFullDescribe);
   }
 
   public checkVerb(expectedVerb: string): void {
@@ -28,6 +28,10 @@ export class CommandContext {
 
   public addText(message: string): void {
     this.entries.push(new StoryEntry(StoryEntryType.StoryNarrative, message, this.sentence));
+  }
+
+  public addRoomName(message: string): void {
+    this.entries.push(new StoryEntry(StoryEntryType.RoomName, message, this.sentence));
   }
 
   public addError(message: string): void {

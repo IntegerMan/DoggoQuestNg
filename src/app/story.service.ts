@@ -1,6 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
-import {Room} from '../Model/Room';
+import {Room} from '../Model/World/Room';
 import {StoryEntry} from '../Model/StoryEntry';
 import {StoryEntryType} from '../Model/StoryEntryType';
 import {ParserService} from './parser.service';
@@ -27,7 +27,8 @@ export class StoryService {
       new StoryEntry(StoryEntryType.Divider, '')
     ];
 
-    this.rooms.describe(Room.InCrate, entries, true);
+    const context = new CommandContext(entries, null, this.rooms);
+    this.rooms.describe(Room.InCrate, context, true);
 
     return entries;
   }

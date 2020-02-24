@@ -1,4 +1,5 @@
 import {RoomService} from '../app/room.service';
+import {Word} from './Parsing/Word';
 import {Room} from './World/Room';
 import {Sentence} from './Parsing/Sentence';
 import {StoryEntry} from './StoryEntry';
@@ -40,5 +41,9 @@ export class CommandContext {
 
   public addSystem(message: string): void {
     this.entries.push(new StoryEntry(StoryEntryType.SystemText, message, this.sentence));
+  }
+
+  public addDontSee(target: Word): void {
+    this.entries.push(new StoryEntry(StoryEntryType.CommandError, `You don't see a ${target.reduced} here.`, this.sentence));
   }
 }

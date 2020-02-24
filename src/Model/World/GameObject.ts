@@ -1,6 +1,8 @@
 export interface GameObject {
   name: string;
-  description: string;
+  look: string;
   smell: string;
   taste: string;
+  push?: string;
+  eat?: string;
 }

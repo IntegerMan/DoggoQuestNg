@@ -23,11 +23,11 @@ export class Sentence {
     return undefined;
   }
 
-  public get target(): string | undefined {
+  public get target(): Word | undefined {
     if (this.words.length > 1) {
       for (const word of this.words) {
         if (word.isNoun) {
-          return word.reduced;
+          return word;
         }
       }
     }

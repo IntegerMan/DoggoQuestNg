@@ -32,8 +32,8 @@ export class WorldService {
 
       for (const noun of context.sentence.rootWords.filter(w => w.isNoun)) {
         const target: GameObject = currentRoom.objects.find(o => o.name === noun.reduced);
-        noun.target = target;
-        this.logger.log(`Mapped noun ${noun.text} to ${target}`);
+        noun.gameObject = target;
+        this.logger.log(`Mapped noun ${noun.text}`, target);
       }
     } else {
       this.logger.log(`Could not find room ${context.currentRoom}, nouns will not be mapped`);

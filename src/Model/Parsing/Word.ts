@@ -10,7 +10,7 @@ export class Word {
   /**
    * The object in the game this world has been mapped to
    */
-  public target: GameObject | undefined;
+  public gameObject: GameObject | undefined;
 
   constructor(term: nlp.Term) {
     this.text = term.text;

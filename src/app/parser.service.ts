@@ -77,20 +77,17 @@ export class ParserService {
   }
 
   private adjustTags(word: Word): void {
-    switch (word.reduced) {
-      case 'open':
-        word.addTag('Verb');
-        break;
-      case 'crate':
-        word.removeTag('Verb').addTag('Noun');
-        break;
-      case 'on':
-      case 'under':
-      case 'below':
-      case 'behind':
-      case 'above':
-        word.addTag('Preposition');
-        break;
+
+    const verbs = ['bark', 'roo', 'arf', 'yip', 'open', 'growl', 'howl'];
+    const nouns = ['crate'];
+    const preps = ['on', 'under', 'below', 'behind', 'above'];
+
+    if (verbs.find(v => v === word.reduced)) {
+      word.removeTag('Noun').addTag('Verb');
+    } else if (nouns.find(v => v === word.reduced)) {
+      word.removeTag('Verb').addTag('Noun');
+    } else if (preps.find(p => p === word.reduced)) {
+      word.addTag('Preposition');
     }
 
     // Possessive nouns should be treated as adjectives

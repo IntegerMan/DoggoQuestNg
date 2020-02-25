@@ -1,8 +1,10 @@
 import {CommandContext} from '../CommandContext';
 import {GameObject} from './GameObject';
+import {Room} from './Room';
 
 export interface GameRoom {
-  name: string;
-  describe(context: CommandContext): void;
+  displayName: string;
+  id: Room;
   objects: GameObject[];
+  describe(context: CommandContext): void;
 }

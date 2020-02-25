@@ -3,7 +3,6 @@ import {CommandContext} from '../Model/CommandContext';
 import {GameObject} from '../Model/World/GameObject';
 import {GameWorld} from '../Model/World/GameWorld';
 import {LoggingService} from './logging.service';
-import {RoomService} from './room.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ import {RoomService} from './room.service';
 export class WorldService {
   private world: GameWorld;
 
-  constructor(private rooms: RoomService, private logger: LoggingService) {
+  constructor(private logger: LoggingService) {
     this.initialize();
   }
 
@@ -25,7 +24,7 @@ export class WorldService {
   }
 
   public mapNouns(context: CommandContext): void {
-    const currentRoom = this.rooms.getRoom(context.currentRoom);
+    const currentRoom = this.state.getRoom(context.currentRoom);
 
     if (currentRoom) {
       this.logger.log('Mapping sentence nouns', currentRoom, context.sentence);

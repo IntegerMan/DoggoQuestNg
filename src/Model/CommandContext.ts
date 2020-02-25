@@ -1,5 +1,5 @@
-import {RoomService} from '../app/room.service';
 import {Word} from './Parsing/Word';
+import {GameWorld} from './World/GameWorld';
 import {Room} from './World/Room';
 import {Sentence} from './Parsing/Sentence';
 import {StoryEntry} from './StoryEntry';
@@ -9,12 +9,20 @@ export class CommandContext {
 
   public currentRoom: Room = Room.InCrate;
 
-  constructor(private entries: StoryEntry[], public sentence: Sentence, private rooms: RoomService) {
+  constructor(private entries: StoryEntry[], public sentence: Sentence, public world: GameWorld) {
 
   }
 
   public describeCurrentRoom(isFullDescribe: boolean): void {
-    this.rooms.describe(this.currentRoom, this, isFullDescribe);
+    const gameRoom = this.world.getRoom(this.currentRoom);
+
+    this.addRoomName(gameRoom.displayName);
+
+    if (gameRoom) {
+      gameRoom.describe(this);
+    } else {
+      this.addError('No description exists for room ' + this.currentRoom);
+    }
   }
 
   public checkVerb(expectedVerb: string): void {

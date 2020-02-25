@@ -4,7 +4,6 @@ import {Room} from '../Model/World/Room';
 import {StoryEntry} from '../Model/StoryEntry';
 import {StoryEntryType} from '../Model/StoryEntryType';
 import {ParserService} from './parser.service';
-import {RoomService} from './room.service';
 import {VerbService} from './verb.service';
 import {WorldService} from './world.service';
 
@@ -17,7 +16,6 @@ export class StoryService {
 
   constructor(private parser: ParserService,
               private verbs: VerbService,
-              private rooms: RoomService,
               private world: WorldService) {
   }
 
@@ -31,8 +29,8 @@ export class StoryService {
       new StoryEntry(StoryEntryType.Divider, '')
     ];
 
-    const context = new CommandContext(entries, null, this.rooms);
-    this.rooms.describe(Room.InCrate, context, true);
+    const context = new CommandContext(entries, null, this.world.state);
+    context.describeCurrentRoom(true);
 
     return entries;
   }
@@ -40,7 +38,7 @@ export class StoryService {
   public handlePlayerInput(text: string): void {
     const entries: StoryEntry[] = [];
     const sentence = this.parser.parse(text);
-    const context = new CommandContext(entries, sentence, this.rooms);
+    const context = new CommandContext(entries, sentence, this.world.state);
 
     this.world.mapNouns(context);
 

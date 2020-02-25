@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
 import {Word} from '../Model/Parsing/Word';
+import {objectResponse} from '../Model/World/GameObject';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,14 @@ export class VerbService {
   private static handleTargetedVerb(verbName: string, target: Word, context: CommandContext, genericResponse: string) {
     const gameObject = target.gameObject;
     if (gameObject) {
-      if (gameObject[verbName]) {
-        context.addText(gameObject[verbName]);
+      const handler: objectResponse = gameObject[verbName];
+      if (handler) {
+        const action = handler as ((context: CommandContext) => void);
+        if (action) {
+          action(context);
+        } else {
+          context.addText(handler as string);
+        }
       } else {
         context.addText(genericResponse);
       }

@@ -54,4 +54,9 @@ export class CommandContext {
   public addDontSee(target: Word): void {
     this.entries.push(new StoryEntry(StoryEntryType.CommandError, `You don't see a ${target.reduced} here.`, this.sentence));
   }
+
+  public increaseScore(amount: number): void {
+    this.addSystem(`Your score has gone up by ${amount}`);
+    this.world.score += amount;
+  }
 }

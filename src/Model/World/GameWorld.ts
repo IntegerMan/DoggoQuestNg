@@ -3,8 +3,11 @@ import {GameRoom} from './GameRoom';
 import {Room} from './Room';
 
 export class GameWorld {
+  public score = 0;
   constructor() {
   }
+
+  private isCrateOpen = false;
 
   public rooms: GameRoom[] = [
     {
@@ -21,7 +24,15 @@ export class GameWorld {
           look: 'It is just a metal door to the crate.',
           smell: 'It smells like metal.',
           taste: 'It tastes smooth, cold, and boring.',
-          push: 'You push the door but it remains shut'
+          push: (context: CommandContext) => {
+            if (this.isCrateOpen) {
+              context.addText('The door is already open. In order to push it, you\'d have to leave the crate first.');
+            } else {
+              context.addText('You push the door and it flies open. You\'re free!');
+              this.isCrateOpen = true;
+              context.increaseScore(1);
+            }
+          }
         },
         {
           name: 'blanket',

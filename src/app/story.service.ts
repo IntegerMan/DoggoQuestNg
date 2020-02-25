@@ -1,6 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
-import {Room} from '../Model/World/Room';
 import {StoryEntry} from '../Model/StoryEntry';
 import {StoryEntryType} from '../Model/StoryEntryType';
 import {ParserService} from './parser.service';
@@ -13,6 +12,7 @@ import {WorldService} from './world.service';
 export class StoryService {
 
   public EntriesAdded: EventEmitter<StoryEntry[]> = new EventEmitter<StoryEntry[]>();
+  public score = 0;
 
   constructor(private parser: ParserService,
               private verbs: VerbService,
@@ -32,6 +32,7 @@ export class StoryService {
     const context = new CommandContext(entries, null, this.world.state);
     context.describeCurrentRoom(true);
 
+    this.score = context.world.score;
     return entries;
   }
 
@@ -55,6 +56,7 @@ export class StoryService {
     }
 
     // Tell the user interface that we're done adding in commands
+    this.score = context.world.score;
     this.EntriesAdded.emit(entries);
   }
 

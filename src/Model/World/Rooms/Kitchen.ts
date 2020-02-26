@@ -1,0 +1,17 @@
+import {CommandContext} from '../../CommandContext';
+import {GameObject} from '../GameObject';
+import {Room} from '../Room';
+import {RoomBase} from './RoomBase';
+
+export class Kitchen extends RoomBase {
+  objects: GameObject[];
+
+  constructor() {
+    super('Kitchen', Room.Kitchen);
+    this.objects = [];
+  }
+
+  describe(context: CommandContext): void {
+    context.addText(`This is the kitchen`);
+  }
+}

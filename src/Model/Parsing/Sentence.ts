@@ -68,4 +68,8 @@ export class Sentence {
 
     return undefined;
   }
+
+  assumeVerb(verb: string): void {
+    this.words = [new Word(verb, verb, ['Verb']), ...this.words];
+  }
 }

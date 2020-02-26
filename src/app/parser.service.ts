@@ -34,11 +34,21 @@ export class ParserService {
     // This serves as a layer of abstraction between Compromise and the rest of the code
     let word: Word;
     for (const term of terms) {
-      word = new Word(term);
+      const tags: string[] = [];
+      for (const tag in term.tags) {
+        if (term.tags.hasOwnProperty(tag)) {
+          tags.push(tag);
+        }
+      }
+      word = new Word(term.text, term.reduced, tags);
 
       this.adjustTags(word);
 
       sentence.addWord(word);
+    }
+
+    if (sentence.words.length > 0 && !sentence.verbWord && sentence.words[0].hasTag('Direction')) {
+      sentence.assumeVerb('go');
     }
 
     // Now that we have our words, let's start linking them together

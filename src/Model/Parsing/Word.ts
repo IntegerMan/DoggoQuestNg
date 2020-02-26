@@ -1,8 +1,7 @@
-import nlp from 'compromise';
 import {GameObject} from '../World/GameObject';
 
 export class Word {
-  readonly tags: Record<string, boolean>;
+  private tags: string[];
 
   public parent: Word;
   public children: Word[] = [];
@@ -12,37 +11,17 @@ export class Word {
    */
   public gameObject: GameObject | undefined;
 
-  constructor(term: nlp.Term) {
-    this.text = term.text;
-    this.reduced = term.reduced;
-    this.tags = term.tags;
+  constructor(public text: string, public reduced: string, initialTags: string[]) {
+    this.tags = initialTags;
   }
 
   public get tagNames(): string[] {
-    const names: string[] = [];
-    // tslint:disable-next-line:forin
-    for (const tag in this.tags) {
-      if (this.tags.hasOwnProperty(tag)) {
-        names.push(tag);
-      }
-    }
-    return names;
+    return this.tags;
   }
 
   public get hasChildren(): boolean {
     return this.children.length > 0;
   }
-
-
-  /**
-   * The raw text the user typed in
-   */
-  public text: string;
-
-  /**
-   * The normalized text for text comparison / matching
-   */
-  public reduced: string;
 
   public get isNoun(): boolean {
     return this.hasTag('Noun');
@@ -56,22 +35,22 @@ export class Word {
     return this.hasTag('Adverb');
   }
 
-  public get isAdjective(): boolean {
-    return this.hasTag('Adjective');
-  }
-
   public hasTag(tagName: string): boolean {
-    // tslint:disable-next-line:no-string-literal
-    return this.tags[tagName];
+    return this.tags.findIndex(t => t === tagName) >= 0;
   }
 
   public addTag(tagName: string): Word {
-    this.tags[tagName] = true;
+    if (!this.hasTag(tagName)) {
+      this.tags.push(tagName);
+    }
     return this;
   }
 
   public removeTag(tagName: string): Word {
-    delete this.tags[tagName];
+    const index = this.tags.findIndex(t => t === tagName);
+    if (index >= 0) {
+      this.tags = this.tags.splice(index, 1);
+    }
     return this;
   }
 

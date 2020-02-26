@@ -81,6 +81,7 @@ export class ParserService {
     const verbs = ['bark', 'roo', 'arf', 'yip', 'open', 'growl', 'howl'];
     const nouns = ['crate'];
     const preps = ['on', 'under', 'below', 'behind', 'above'];
+    const directions = ['north', 'south', 'east', 'west'];
 
     if (verbs.find(v => v === word.reduced)) {
       word.removeTag('Noun').addTag('Verb');
@@ -88,6 +89,8 @@ export class ParserService {
       word.removeTag('Verb').addTag('Noun');
     } else if (preps.find(p => p === word.reduced)) {
       word.addTag('Preposition');
+    } else if (directions.find(d => d === word.reduced)) {
+      word.addTag('Noun').addTag('Direction');
     }
 
     // Possessive nouns should be treated as adjectives

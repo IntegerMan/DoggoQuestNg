@@ -26,16 +26,26 @@ export class WorldService {
   public mapNouns(context: CommandContext): void {
     const currentRoom = this.state.getRoom(context.currentRoom);
 
-    if (currentRoom) {
-      this.logger.log('Mapping sentence nouns', currentRoom, context.sentence);
-
-      for (const noun of context.sentence.rootWords.filter(w => w.isNoun)) {
-        const target: GameObject = currentRoom.objects.find(o => o.name === noun.reduced);
-        noun.gameObject = target;
-        this.logger.log(`Mapped noun ${noun.text}`, target);
-      }
-    } else {
+    if (!currentRoom) {
       this.logger.log(`Could not find room ${context.currentRoom}, nouns will not be mapped`);
+      return;
+    }
+
+    this.logger.log('Mapping sentence nouns', currentRoom, context.sentence);
+
+    for (const noun of context.sentence.rootWords.filter(w => w.isNoun)) {
+      const target: GameObject = currentRoom.objects.find(o => o.name === noun.reduced);
+      noun.gameObject = target;
+      this.logger.log(`Mapped noun ${noun.text}`, target);
+      noun.addTag('Mapped');
+    }
+
+    this.logger.log('Mapping sentence directions', currentRoom, context.sentence);
+
+    for (const dir of context.sentence.rootWords.filter(w => w.isDirection)) {
+      dir.room = currentRoom[dir.reduced];
+      this.logger.log(`Mapped direction ${dir.text} to ${dir.room}`);
+      dir.addTag('Mapped');
     }
   }
 }

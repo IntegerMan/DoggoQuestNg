@@ -1,4 +1,6 @@
 import {GameObject} from '../World/GameObject';
+import {GameRoom} from '../World/GameRoom';
+import {Room} from '../World/Room';
 
 export class Word {
   private tags: string[];
@@ -10,6 +12,8 @@ export class Word {
    * The object in the game this world has been mapped to
    */
   public gameObject: GameObject | undefined;
+
+  public room: Room | undefined;
 
   constructor(public text: string, public reduced: string, initialTags: string[]) {
     this.tags = initialTags;
@@ -25,6 +29,10 @@ export class Word {
 
   public get isNoun(): boolean {
     return this.hasTag('Noun');
+  }
+
+  public get isDirection(): boolean {
+    return this.hasTag('Direction');
   }
 
   public get isVerb(): boolean {

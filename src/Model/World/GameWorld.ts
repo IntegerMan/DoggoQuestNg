@@ -1,6 +1,6 @@
-import {CrateRoom} from './Rooms/CrateRoom';
 import {GameRoom} from './GameRoom';
 import {Room} from './Room';
+import {CrateRoom} from './Rooms/CrateRoom';
 import {Dining} from './Rooms/Dining';
 import {EntryRoom} from './Rooms/EntryRoom';
 import {Kitchen} from './Rooms/Kitchen';
@@ -12,6 +12,7 @@ import {UnderCouch} from './Rooms/UnderCouch';
 
 export class GameWorld {
   public score = 0;
+  public currentRoom: Room = Room.InCrate;
   constructor() {
   }
 

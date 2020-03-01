@@ -6,6 +6,8 @@ import {RoomBase} from './RoomBase';
 export class Kitchen extends RoomBase {
   objects: GameObject[];
 
+  east = Room.Dining;
+
   constructor() {
     super('Kitchen', Room.Kitchen);
     this.objects = [];

@@ -7,7 +7,7 @@ export class UnderCouch extends RoomBase {
   objects: GameObject[];
 
   constructor() {
-    super('Living Room (Under Couch)', Room.Dining);
+    super('Living Room (Under Couch)', Room.UnderCouch);
     this.objects = [];
   }
 

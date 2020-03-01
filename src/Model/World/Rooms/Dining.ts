@@ -6,6 +6,10 @@ import {RoomBase} from './RoomBase';
 export class Dining extends RoomBase {
   objects: GameObject[];
 
+  west = Room.Kitchen;
+  east = Room.Living;
+  north = Room.Entry;
+
   constructor() {
     super('Dining Room', Room.Dining);
     this.objects = [];

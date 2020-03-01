@@ -83,6 +83,19 @@ export class VerbService {
       `You stare at it and think, but nothing interesting comes to mind. You find yourself suddenly wanting to destroy things.`);
   }
 
+  public handleGo(context: CommandContext): void {
+    context.checkVerb('go');
+
+    const target = context.sentence.target;
+    if (!target) {
+      context.addError(`You need to say which way you want to go. For example, try 'go to the north' or 'go west'`);
+    } else if (target.room !== undefined && target.room !== context.currentRoom) {
+      context.changeRoom(target.room, target.text);
+    } else {
+      context.addError(`You can't go that way`);
+    }
+  }
+
   public handleBark(context: CommandContext): void {
     VerbService.handleVerb(context,
       'bark',
@@ -120,6 +133,10 @@ export class VerbService {
       case 'remember':
       case 'consider':
         return this.handleThinkAbout.bind(this);
+      case 'go':
+      case 'walk':
+      case 'run':
+        return this.handleGo.bind(this);
       default:
         return undefined;
     }

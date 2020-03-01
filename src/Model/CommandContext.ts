@@ -7,22 +7,32 @@ import {StoryEntryType} from './StoryEntryType';
 
 export class CommandContext {
 
-  public currentRoom: Room = Room.InCrate;
-
   constructor(private entries: StoryEntry[], public sentence: Sentence, public world: GameWorld) {
 
   }
 
+  public get currentRoom(): Room {
+    return this.world.currentRoom;
+  }
+
   public describeCurrentRoom(isFullDescribe: boolean): void {
-    const gameRoom = this.world.getRoom(this.currentRoom);
+    const gameRoom = this.world.getRoom(this.world.currentRoom);
 
     this.addRoomName(gameRoom.displayName);
 
-    if (gameRoom) {
-      gameRoom.describe(this);
-    } else {
-      this.addError('No description exists for room ' + this.currentRoom);
+    if (isFullDescribe) {
+      if (gameRoom) {
+        gameRoom.describe(this);
+      } else {
+        this.addError(`No description exists for room ${this.world.currentRoom}`);
+      }
     }
+  }
+
+  public changeRoom(newRoom: Room, directionName: string): void {
+    this.addText(`You go ${directionName}`);
+    this.world.currentRoom = newRoom;
+    this.describeCurrentRoom(true); // TODO: Should only be true on first visit
   }
 
   public checkVerb(expectedVerb: string): void {

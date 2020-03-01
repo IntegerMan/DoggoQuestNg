@@ -7,7 +7,7 @@ export class OnChair extends RoomBase {
   objects: GameObject[];
 
   constructor() {
-    super('Office (On Chair)', Room.Dining);
+    super('Office (On Chair)', Room.OnChair);
     this.objects = [];
   }
 

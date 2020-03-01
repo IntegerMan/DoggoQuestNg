@@ -14,6 +14,9 @@ export class ParserService {
   public parse(text: string): Sentence {
     this.logger.log(`Player Command: ${text}`);
 
+    // Allow shorthand such as 'n' for north and 'l' for look
+    text = this.expandShorthand(text);
+
     // Have Compromise NLP Parse the sentence
     const terms = nlp(text).termList();
     this.logger.log(`Parsed terms for ${text}`, terms);
@@ -25,6 +28,23 @@ export class ParserService {
     // Log and return
     this.logger.log(`Constructed sentence`, sentence);
     return sentence;
+  }
+
+  private expandShorthand(text: string) {
+
+    // Ensure we start and with a blank space to allow for string replace operations
+    if (text) {
+      text = ' ' + text + ' ';
+    } else {
+      text = ' ';
+    }
+
+    // Do smart replacement. Split / join is the equivalent of "replaceAll"
+    return text.split(' n ').join(' north ')
+               .split(' e ').join(' east ')
+               .split(' s ').join(' south ')
+               .split(' w ').join(' west ')
+               .split(' l ').join(' look ');
   }
 
   private buildSentence(terms: nlp.Term[]): Sentence {

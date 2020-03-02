@@ -40,11 +40,18 @@ export class ParserService {
     }
 
     // Do smart replacement. Split / join is the equivalent of "replaceAll"
-    return text.split(' n ').join(' north ')
-               .split(' e ').join(' east ')
-               .split(' s ').join(' south ')
-               .split(' w ').join(' west ')
-               .split(' l ').join(' look ');
+    text = this.replaceAll(text, ' n ', ' north ');
+    text = this.replaceAll(text, ' e ', ' east ');
+    text = this.replaceAll(text, ' s ', ' south ');
+    text = this.replaceAll(text, ' w ', ' west ');
+    text = this.replaceAll(text, ' l ', ' look ');
+    text = this.replaceAll(text, ' x ', ' examine ');
+
+    return text;
+  }
+
+  private replaceAll(text: string, match: string, replacement: string): string {
+    return text.split(match).join(replacement);
   }
 
   private buildSentence(terms: nlp.Term[]): Sentence {

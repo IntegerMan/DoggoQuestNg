@@ -29,6 +29,8 @@ export class Crate extends RoomBase {
         name: 'blanket',
         look: 'The blanket is soft and snuggly. You like it.',
         smell: 'It smells like you!',
+        eat: 'You would never want to hurt your precious blanket!',
+        take: 'You really should leave it in your crate. The crate is uncomfortable to lay down in without a nice soft blanket',
         taste: 'It\'s not that interesting to taste. You lick it sometimes while you sleep in your crate, but it just tastes like blanket.'
       },
       {

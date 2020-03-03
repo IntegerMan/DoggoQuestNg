@@ -9,4 +9,5 @@ export interface GameObject {
   taste: objectResponse;
   push?: objectResponse;
   eat?: objectResponse;
+  take?: objectResponse;
 }

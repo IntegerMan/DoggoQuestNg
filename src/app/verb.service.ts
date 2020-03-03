@@ -106,6 +106,13 @@ export class VerbService {
       `You glare at it and give it your fiercest bark. It makes no move in response. It must be scared.`);
   }
 
+  public handleGet(context: CommandContext): void {
+    VerbService.handleVerb(context,
+      'take',
+      `Try tying what you'd like to get, for example 'Get blanket'.`,
+      `You can't take that with you, sadly.`);
+  }
+
   public getHandler(verb: string): (context: CommandContext) => void | undefined {
     switch (verb) {
       case 'eat':
@@ -140,6 +147,9 @@ export class VerbService {
       case 'walk':
       case 'run':
         return this.handleGo.bind(this);
+      case 'get':
+      case 'take':
+        return this.handleGet.bind(this);
       default:
         return undefined;
     }

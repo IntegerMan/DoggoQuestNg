@@ -36,7 +36,7 @@ export class StoryService {
     return entries;
   }
 
-  public handlePlayerInput(text: string): void {
+  public handlePlayerInput(text: string): StoryEntry[] {
     const entries: StoryEntry[] = [];
     const sentence = this.parser.parse(text);
     const context = new CommandContext(entries, sentence, this.world.state);
@@ -58,6 +58,9 @@ export class StoryService {
     // Tell the user interface that we're done adding in commands
     this.score = context.world.score;
     this.EntriesAdded.emit(entries);
+
+    // Directly returning the entries makes it easier for testing
+    return entries;
   }
 
   private handleCommand(context: CommandContext): void {

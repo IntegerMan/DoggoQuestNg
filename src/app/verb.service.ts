@@ -24,11 +24,14 @@ export class VerbService {
     if (gameObject) {
       const handler: objectResponse = gameObject[verbName];
       if (handler) {
-        const action = handler as ((context: CommandContext) => void);
-        if (action) {
-          action(context);
-        } else {
-          context.addText(handler as string);
+        switch (typeof handler) {
+          case 'string':
+            context.addText(handler as string);
+            break;
+          default:
+            const action = handler as ((context: CommandContext) => void);
+            action(context);
+            break;
         }
       } else {
         context.addText(genericResponse);

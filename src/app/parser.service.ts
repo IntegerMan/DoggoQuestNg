@@ -9,28 +9,42 @@ import nlp from 'compromise';
 })
 export class ParserService {
 
-  constructor(private logger: LoggingService) { }
+  constructor(private logger?: LoggingService) { }
 
-  public parse(text: string): Sentence {
-    this.logger.log(`Player Command: ${text}`);
-
-    // Allow shorthand such as 'n' for north and 'l' for look
-    text = this.expandShorthand(text);
-
-    // Have Compromise NLP Parse the sentence
-    const terms = nlp(text).termList();
-    this.logger.log(`Parsed terms for ${text}`, terms);
-
-    // Construct the sentence
-    const sentence = this.buildSentence(terms);
-    sentence.text = text;
-
-    // Log and return
-    this.logger.log(`Constructed sentence`, sentence);
-    return sentence;
+  private static replaceAll(text: string, match: string, replacement: string): string {
+    return text.split(match).join(replacement);
   }
 
-  private expandShorthand(text: string) {
+  private static linkSentence(sentence: Sentence) {
+    const verb: Word = sentence.verbWord;
+    let lastNoun: Word = null;
+
+    const reversedSentence = sentence.words.slice().reverse();
+    for (const word of reversedSentence) {
+      if (word.isNoun) {
+        lastNoun = word;
+        continue;
+      }
+
+      if (word.isVerb) {
+        continue;
+      }
+
+      if (word.isAdverb) {
+        word.parent = verb;
+        if (verb) {
+          verb.addChild(word);
+        }
+      } else {
+        word.parent = lastNoun;
+        if (lastNoun) {
+          lastNoun.addChild(word);
+        }
+      }
+    }
+  }
+
+  private static expandShorthand(text: string) {
 
     // Ensure we start and with a blank space to allow for string replace operations
     if (text) {
@@ -40,18 +54,39 @@ export class ParserService {
     }
 
     // Do smart replacement. Split / join is the equivalent of "replaceAll"
-    text = this.replaceAll(text, ' n ', ' north ');
-    text = this.replaceAll(text, ' e ', ' east ');
-    text = this.replaceAll(text, ' s ', ' south ');
-    text = this.replaceAll(text, ' w ', ' west ');
-    text = this.replaceAll(text, ' l ', ' look ');
-    text = this.replaceAll(text, ' x ', ' examine ');
+    text = ParserService.replaceAll(text, ' n ', ' north ');
+    text = ParserService.replaceAll(text, ' e ', ' east ');
+    text = ParserService.replaceAll(text, ' s ', ' south ');
+    text = ParserService.replaceAll(text, ' w ', ' west ');
+    text = ParserService.replaceAll(text, ' l ', ' look ');
+    text = ParserService.replaceAll(text, ' x ', ' examine ');
 
     return text;
   }
 
-  private replaceAll(text: string, match: string, replacement: string): string {
-    return text.split(match).join(replacement);
+  public parse(text: string): Sentence {
+    if (this.logger) {
+      this.logger.log(`Player Command: ${text}`);
+    }
+
+    // Allow shorthand such as 'n' for north and 'l' for look
+    text = ParserService.expandShorthand(text);
+
+    // Have Compromise NLP Parse the sentence
+    const terms = nlp(text).termList();
+    if (this.logger) {
+      this.logger.log(`Parsed terms for ${text}`, terms);
+    }
+
+    // Construct the sentence
+    const sentence = this.buildSentence(terms);
+    sentence.text = text;
+
+    // Log and return
+    if (this.logger) {
+      this.logger.log(`Constructed sentence`, sentence);
+    }
+    return sentence;
   }
 
   private buildSentence(terms: nlp.Term[]): Sentence {
@@ -79,38 +114,9 @@ export class ParserService {
     }
 
     // Now that we have our words, let's start linking them together
-    this.linkSentence(sentence);
+    ParserService.linkSentence(sentence);
 
     return sentence;
-  }
-
-  private linkSentence(sentence: Sentence) {
-    const verb: Word = sentence.verbWord;
-    let lastNoun: Word = null;
-
-    const reversedSentence = sentence.words.slice().reverse();
-    for (const word of reversedSentence) {
-      if (word.isNoun) {
-        lastNoun = word;
-        continue;
-      }
-
-      if (word.isVerb) {
-        continue;
-      }
-
-      if (word.isAdverb) {
-        word.parent = verb;
-        if (verb) {
-          verb.addChild(word);
-        }
-      } else {
-        word.parent = lastNoun;
-        if (lastNoun) {
-          lastNoun.addChild(word);
-        }
-      }
-    }
   }
 
   private adjustTags(word: Word): void {

@@ -3,7 +3,7 @@ import {GameObject} from '../GameObject';
 import {Room} from '../Room';
 import {RoomBase} from './RoomBase';
 
-export class CrateRoom extends RoomBase {
+export class Crate extends RoomBase {
   objects: GameObject[];
 
   north = Room.Office;

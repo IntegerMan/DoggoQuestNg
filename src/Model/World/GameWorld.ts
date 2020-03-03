@@ -1,6 +1,6 @@
 import {GameRoom} from './GameRoom';
 import {Room} from './Room';
-import {CrateRoom} from './Rooms/CrateRoom';
+import {Crate} from './Rooms/Crate';
 import {Dining} from './Rooms/Dining';
 import {EntryRoom} from './Rooms/EntryRoom';
 import {Kitchen} from './Rooms/Kitchen';
@@ -21,7 +21,7 @@ export class GameWorld {
   public rooms: GameRoom[] = [
     new Office(),
     new OnChair(),
-    new CrateRoom(),
+    new Crate(),
     new EntryRoom(),
     new Dining(),
     new LivingRoom(),

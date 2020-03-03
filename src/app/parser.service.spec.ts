@@ -1,12 +1,10 @@
-import {LoggingService} from './logging.service';
 import {ParserService} from './parser.service';
 
 describe('Parsing', () => {
   let service: ParserService;
 
   beforeEach(() => {
-    const logger = new LoggingService();
-    service = new ParserService(logger);
+    service = new ParserService();
   });
 
   it('Should parse sentences without error', () => {

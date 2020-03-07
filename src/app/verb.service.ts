@@ -112,6 +112,12 @@ export class VerbService {
       `Try tying what you'd like to get, for example 'Get blanket'.`,
       `You can't take that with you, sadly.`);
   }
+  public handleTaste(context: CommandContext): void {
+    VerbService.handleVerb(context,
+      'lick',
+      `Try tying what you'd like to lick, for example 'Lick the chair'.`,
+      `You\'ve licked that before when you were puppy and don\'t want to repeat the experience.`);
+  }
 
   public getHandler(verb: string): (context: CommandContext) => void | undefined {
     switch (verb) {
@@ -130,6 +136,9 @@ export class VerbService {
       case 'smell':
       case 'sniff':
         return this.handleSmell.bind(this);
+      case 'taste':
+      case 'lick':
+        return this.handleTaste.bind(this);
       case 'bark':
       case 'growl':
       case 'howl':

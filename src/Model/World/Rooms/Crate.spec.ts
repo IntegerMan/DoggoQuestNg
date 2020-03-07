@@ -36,9 +36,8 @@ describe('Crate', () => {
     it('Smells like you', () => {
       expect(engine.getResponse('smell crate')).toContain('smells like you');
     });
-    it(`opens with 'open crate`, () => {
-      const response = engine.getResponseState('open crate');
-      expect(response.state.isCrateOpen).toBe(true);
+    it(`responds to 'open crate`, () => {
+      expect(engine.getResponse('open crate')).toContain('try pushing the door');
     });
   });
 

@@ -7,12 +7,18 @@ export class Crate extends RoomBase {
   objects: GameObject[];
 
   north = Room.Office;
+  tryGoNorth(context: CommandContext): boolean {
+    if (!context.world.isCrateOpen) {
+      context.addText('The crate door is shut and blocks your way.');
+      return true;
+    }
+    return false;
+  }
 
   constructor() {
     super('In Crate', Room.InCrate);
     this.objects = [{
       name: 'door',
-      look: 'It is just a metal door to the crate.',
       smell: 'It smells like metal.',
       taste: 'It tastes smooth, cold, and boring.',
       push: (context: CommandContext) => {
@@ -22,6 +28,13 @@ export class Crate extends RoomBase {
           context.addText('You push the door and it flies open. You\'re free!');
           context.world.isCrateOpen = true;
           context.increaseScore(1);
+        }
+      },
+      look: (context: CommandContext) => {
+        if (context.world.isCrateOpen) {
+          context.addText('The door is open and the house practically invites you to explore it.');
+        } else {
+          context.addText('Something about the door looks different. It doesn\'t look as shut as it usually is. Could it be they forgot to actually lock it?');
         }
       }
     },
@@ -37,6 +50,7 @@ export class Crate extends RoomBase {
         name: 'crate',
         look: 'The crate is big enough for you to fit comfortably in and not too much bigger. You do not like it in here.',
         smell: 'It smells like you!',
+        push: 'The crate rocks slightly, but not significantly. Maybe try pushing the door instead?',
         taste: 'It\'s plastic and boring. I don\'t want to lick that.'
       }];
   }

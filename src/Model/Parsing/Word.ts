@@ -57,7 +57,7 @@ export class Word {
   public removeTag(tagName: string): Word {
     const index = this.tags.findIndex(t => t === tagName);
     if (index >= 0) {
-      this.tags = this.tags.splice(index, 1);
+      this.tags.splice(index, 1);
     }
     return this;
   }

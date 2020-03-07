@@ -1,4 +1,5 @@
 import {Word} from './Parsing/Word';
+import {GameRoom} from './World/GameRoom';
 import {GameWorld} from './World/GameWorld';
 import {Room} from './World/Room';
 import {Sentence} from './Parsing/Sentence';
@@ -30,6 +31,15 @@ export class CommandContext {
   }
 
   public changeRoom(newRoom: Room, directionName: string): void {
+    const currentData: GameRoom = this.world.getRoom(this.currentRoom);
+
+    // Check to see if we have something like canGoNorth and execute it if relevant
+    const tryGoVar = `tryGo` + directionName[0].toUpperCase() + directionName.slice(1);
+    const tryGo: (context: CommandContext) => boolean | undefined = currentData[tryGoVar];
+    if (tryGo && tryGo(this)) {
+      return;
+    }
+
     this.addText(`You go ${directionName}`);
     this.world.currentRoom = newRoom;
     this.describeCurrentRoom(true); // TODO: Should only be true on first visit

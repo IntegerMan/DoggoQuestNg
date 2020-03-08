@@ -7,6 +7,8 @@ export class LivingRoom extends RoomBase {
   objects: GameObject[];
 
   west = Room.Dining;
+  in = Room.UnderCouch;
+  under = Room.UnderCouch;
 
   constructor() {
     super('Living Room', Room.Living);

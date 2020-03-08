@@ -7,5 +7,4 @@ export enum Room {
   Kitchen,
   Living,
   UnderCouch,
-  OnCouch
 }

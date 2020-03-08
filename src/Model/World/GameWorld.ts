@@ -7,7 +7,6 @@ import {Kitchen} from './Rooms/Kitchen';
 import {LivingRoom} from './Rooms/LivingRoom';
 import {Office} from './Rooms/Office';
 import {OnChair} from './Rooms/OnChair';
-import {OnCouch} from './Rooms/OnCouch';
 import {UnderCouch} from './Rooms/UnderCouch';
 
 export class GameWorld {
@@ -27,7 +26,6 @@ export class GameWorld {
     new Entryway(),
     new Dining(),
     new LivingRoom(),
-    new OnCouch(),
     new UnderCouch(),
     new Kitchen()
   ];

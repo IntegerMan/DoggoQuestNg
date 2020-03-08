@@ -17,7 +17,7 @@ describe('Office', () => {
     });
     it('Should allow navigation to the entry to the east', () => {
       const response = engine.getResponseState('go east');
-      expect(response.state.currentRoom).toBe(Room.Entry);
+      expect(response.state.currentRoom).toBe(Room.Entryway);
     });
     it('Should allow navigation to the chair when climbing up', () => {
       const response = engine.getResponseState('go up');

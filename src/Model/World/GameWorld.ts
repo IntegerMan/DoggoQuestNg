@@ -2,7 +2,7 @@ import {GameRoom} from './GameRoom';
 import {Room} from './Room';
 import {Crate} from './Rooms/Crate';
 import {Dining} from './Rooms/Dining';
-import {EntryRoom} from './Rooms/EntryRoom';
+import {Entryway} from './Rooms/Entryway';
 import {Kitchen} from './Rooms/Kitchen';
 import {LivingRoom} from './Rooms/LivingRoom';
 import {Office} from './Rooms/Office';
@@ -24,7 +24,7 @@ export class GameWorld {
     new Office(),
     new OnChair(),
     new Crate(),
-    new EntryRoom(),
+    new Entryway(),
     new Dining(),
     new LivingRoom(),
     new OnCouch(),

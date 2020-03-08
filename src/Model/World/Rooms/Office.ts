@@ -51,7 +51,7 @@ export class Office extends RoomBase {
     }
   ];
 
-  east = Room.Entry;
+  east = Room.Entryway;
   south = Room.InCrate;
   up = Room.OnChair;
   in = Room.InCrate;

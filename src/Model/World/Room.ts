@@ -2,7 +2,7 @@ export enum Room {
   InCrate,
   Office,
   OnChair,
-  Entry,
+  Entryway,
   Dining,
   Kitchen,
   Living,

@@ -8,7 +8,7 @@ export class Dining extends RoomBase {
 
   west = Room.Kitchen;
   east = Room.Living;
-  north = Room.Entry;
+  north = Room.Entryway;
 
   constructor() {
     super('Dining Room', Room.Dining);

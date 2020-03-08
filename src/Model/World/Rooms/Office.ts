@@ -39,7 +39,8 @@ export class Office extends RoomBase {
 
   east = Room.Entry;
   south = Room.InCrate;
-  // TODO: Support up to jump onto the rocking chair
+  up = Room.OnChair;
+  in = Room.InCrate;
 
   constructor() {
     super('Office', Room.Office);

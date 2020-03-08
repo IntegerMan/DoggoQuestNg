@@ -124,7 +124,7 @@ export class ParserService {
     const verbs = ['bark', 'roo', 'arf', 'yip', 'open', 'growl', 'howl'];
     const nouns = ['crate'];
     const preps = ['on', 'under', 'below', 'behind', 'above'];
-    const directions = ['north', 'south', 'east', 'west'];
+    const directions = ['north', 'south', 'east', 'west', 'up', 'down', 'in', 'out'];
 
     if (verbs.find(v => v === word.reduced)) {
       word.removeTag('Noun').addTag('Verb');

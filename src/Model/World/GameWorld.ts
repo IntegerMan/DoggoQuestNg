@@ -13,6 +13,8 @@ import {UnderCouch} from './Rooms/UnderCouch';
 export class GameWorld {
   public score = 0;
   public currentRoom: Room = Room.InCrate;
+  public isChairChewed: boolean;
+
   constructor() {
   }
 

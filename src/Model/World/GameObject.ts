@@ -6,7 +6,7 @@ export interface GameObject {
   name: objectResponse;
   look: objectResponse;
   smell: objectResponse;
-  taste: objectResponse;
+  lick?: objectResponse;
   push?: objectResponse;
   eat?: objectResponse;
   take?: objectResponse;

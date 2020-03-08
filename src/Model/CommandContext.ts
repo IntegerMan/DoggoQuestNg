@@ -31,13 +31,16 @@ export class CommandContext {
   }
 
   public changeRoom(newRoom: Room, directionName: string): void {
-    const currentData: GameRoom = this.world.getRoom(this.currentRoom);
+    const currentRoom: GameRoom = this.world.getRoom(this.currentRoom);
 
     // Check to see if we have something like canGoNorth and execute it if relevant
     const tryGoVar = `tryGo` + directionName[0].toUpperCase() + directionName.slice(1);
-    const tryGo: (context: CommandContext) => boolean | undefined = currentData[tryGoVar];
-    if (tryGo && tryGo(this)) {
-      return;
+    let tryGo: (context: CommandContext) => boolean | undefined = currentRoom[tryGoVar];
+    if (tryGo) {
+      tryGo = tryGo.bind(currentRoom);
+      if (tryGo(this)) {
+        return;
+      }
     }
 
     this.addText(`You go ${directionName}`);

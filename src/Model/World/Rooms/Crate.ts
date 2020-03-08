@@ -26,7 +26,7 @@ export class Crate extends RoomBase {
     this.objects = [{
       name: 'door',
       smell: 'It smells like metal.',
-      taste: 'It tastes smooth, cold, and boring.',
+      lick: 'It tastes smooth, cold, and boring.',
       push: (context: CommandContext) => {
         if (context.world.isCrateOpen) {
           context.addText('The door is already open. In order to push it, you\'d have to leave the crate first.');
@@ -50,14 +50,14 @@ export class Crate extends RoomBase {
         smell: 'It smells like you!',
         eat: 'You would never want to hurt your precious blanket!',
         take: 'You really should leave it in your crate. The crate is uncomfortable to lay down in without a nice soft blanket',
-        taste: 'It\'s not that interesting to taste. You lick it sometimes while you sleep in your crate, but it just tastes like blanket.'
+        lick: 'It\'s not that interesting to taste. You lick it sometimes while you sleep in your crate, but it just tastes like blanket.'
       },
       {
         name: 'crate',
         look: 'The crate is big enough for you to fit comfortably in and not too much bigger. You do not like it in here.',
         smell: 'It smells like you!',
         push: 'The crate rocks slightly, but not significantly. Maybe try pushing the door instead?',
-        taste: 'It\'s plastic and boring. I don\'t want to lick that.'
+        lick: 'It\'s plastic and boring. I don\'t want to lick that.'
       }];
   }
 

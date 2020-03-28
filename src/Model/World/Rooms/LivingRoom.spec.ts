@@ -11,12 +11,12 @@ describe('Living Room', () => {
   });
 
   describe('navigation', () => {
-    it('Should allow navigation to the dining room to the east', () => {
-      const response = engine.getResponseState('go east');
+    it('Should allow navigation to the dining room to the west', () => {
+      const response = engine.getResponseState('go west');
       expect(response.state.currentRoom).toBe(Room.Dining);
     });
     it('Should allow navigation to under the couch', () => {
-      const response = engine.getResponseState('go east');
+      const response = engine.getResponseState('go under couch');
       expect(response.state.currentRoom).toBe(Room.UnderCouch);
     });
   });

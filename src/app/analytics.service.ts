@@ -9,7 +9,9 @@ export class AnalyticsService {
 
   constructor() {
     this.win = window;
-    this.win.ga('create', 'UA-108393235-4', 'auto');
+    if (this.win) {
+      this.win.ga('create', 'UA-108393235-4', 'auto');
+    }
   }
 
   public logPlayerText(text: string, roomName: string, isValid: boolean, world: GameWorld): void {
@@ -17,6 +19,8 @@ export class AnalyticsService {
     if (!isValid) {
       eventName = 'Invalid Input';
     }
-    this.win.ga('send', 'event', eventName, `${roomName}: ${text}`, roomName, isValid, world);
+    if (this.win) {
+      this.win.ga('send', 'event', eventName, `${roomName}: ${text}`, roomName, isValid, world);
+    }
   }
 }

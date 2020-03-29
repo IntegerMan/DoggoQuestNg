@@ -53,7 +53,9 @@ export class StoryService {
     if (validationResult) {
       // If the player said something we couldn't figure out, show that error response
       context.addError(validationResult);
-      this.analytics.logPlayerText(text, context.currentRoomName, false);
+      if (this.analytics) {
+        this.analytics.logPlayerText(text, context.currentRoomName, false, context.world);
+      }
     } else {
       this.handleCommand(context);
     }
@@ -81,7 +83,7 @@ export class StoryService {
     }
 
     if (this.analytics) {
-      this.analytics.logPlayerText(context.sentence.text, context.currentRoomName, isValid);
+      this.analytics.logPlayerText(context.sentence.text, context.currentRoomName, isValid, context.world);
     }
   }
 }

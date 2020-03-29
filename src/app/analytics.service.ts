@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {GameWorld} from '../Model/World/GameWorld';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class AnalyticsService {
     this.win.ga('create', 'UA-108393235-4', 'auto');
   }
 
-  public logPlayerText(text: string, roomName: string, isValid: boolean): void {
-    this.win.ga('send', 'event', 'Player Input', `${roomName}: ${text}`, roomName, isValid, {});
+  public logPlayerText(text: string, roomName: string, isValid: boolean, world: GameWorld): void {
+    let eventName = 'Player Input';
+    if (!isValid) {
+      eventName = 'Invalid Input';
+    }
+    this.win.ga('send', 'event', eventName, `${roomName}: ${text}`, roomName, isValid, world);
   }
 }

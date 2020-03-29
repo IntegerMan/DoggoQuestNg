@@ -1,5 +1,5 @@
 import {CommandContext} from '../CommandContext';
-import {GameObject} from './Objects/GameObject';
+import {GameObject} from './GameObject';
 import {Room} from './Room';
 
 export interface GameRoom {

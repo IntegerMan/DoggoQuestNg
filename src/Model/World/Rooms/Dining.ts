@@ -1,7 +1,7 @@
 import {CommandContext} from '../../CommandContext';
-import {GameObject} from '../Objects/GameObject';
+import {GameObject} from '../GameObject';
 import {Room} from '../Room';
-import {RoomBase} from './RoomBase';
+import {RoomBase} from '../RoomBase';
 
 export class Dining extends RoomBase {
   objects: GameObject[];

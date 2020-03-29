@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
-import {GameObject} from '../Model/World/Objects/GameObject';
+import {GameObject} from '../Model/World/GameObject';
 import {GameWorld} from '../Model/World/GameWorld';
 import {LoggingService} from './logging.service';
 

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
 import {Word} from '../Model/Parsing/Word';
-import {objectResponse} from '../Model/World/Objects/GameObject';
+import {objectResponse} from '../Model/World/GameObject';
 
 @Injectable({
   providedIn: 'root'

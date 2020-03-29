@@ -1,7 +1,7 @@
-import {CommandContext} from '../../CommandContext';
-import {GameObject} from '../Objects/GameObject';
-import {GameRoom} from '../GameRoom';
-import {Room} from '../Room';
+import {CommandContext} from '../CommandContext';
+import {GameObject} from './GameObject';
+import {GameRoom} from './GameRoom';
+import {Room} from './Room';
 
 export abstract class RoomBase implements GameRoom {
 

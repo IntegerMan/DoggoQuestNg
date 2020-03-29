@@ -1,8 +1,10 @@
 import {CommandContext} from '../../CommandContext';
+import {BlanketObject} from '../Objects/BlanketObject';
+import {CrateDoorObject} from '../Objects/CrateDoorObject';
 import {CrateObject} from '../Objects/CrateObject';
-import {GameObject} from '../Objects/GameObject';
+import {GameObject} from '../GameObject';
 import {Room} from '../Room';
-import {RoomBase} from './RoomBase';
+import {RoomBase} from '../RoomBase';
 
 export class Crate extends RoomBase {
   objects: GameObject[];
@@ -24,35 +26,9 @@ export class Crate extends RoomBase {
 
   constructor() {
     super('In Crate', Room.InCrate);
-    this.objects = [{
-      name: 'door',
-      smell: 'It smells like metal.',
-      lick: 'It tastes smooth, cold, and boring.',
-      push: (context: CommandContext) => {
-        if (context.world.isCrateOpen) {
-          context.addText('The door is already open. In order to push it, you\'d have to leave the crate first.');
-        } else {
-          context.addText('You push the door and it flies open. You\'re free!');
-          context.world.isCrateOpen = true;
-          context.increaseScore(1);
-        }
-      },
-      look: (context: CommandContext) => {
-        if (context.world.isCrateOpen) {
-          context.addText('The door is open and the house practically invites you to explore it.');
-        } else {
-          context.addText('Something about the door looks different. It doesn\'t look as shut as it usually is. Could it be they forgot to actually lock it?');
-        }
-      }
-    },
-      {
-        name: 'blanket',
-        look: 'The blanket is soft and snuggly. You like it.',
-        smell: 'It smells like you!',
-        eat: 'You would never want to hurt your precious blanket!',
-        take: 'You really should leave it in your crate. The crate is uncomfortable to lay down in without a nice soft blanket',
-        lick: 'It\'s not that interesting to taste. You lick it sometimes while you sleep in your crate, but it just tastes like blanket.'
-      },
+    this.objects = [
+      new CrateDoorObject(true),
+      new BlanketObject(),
       new CrateObject(true)
     ];
   }

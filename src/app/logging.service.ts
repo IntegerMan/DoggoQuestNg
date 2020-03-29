@@ -1,3 +1,4 @@
+/* tslint:disable:no-console */
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -11,6 +12,13 @@ export class LoggingService {
     // Log it if the console is available (won't be in all browsers)
     if (console && console.log) {
       console.log(message, optionalParams);
+    }
+  }
+
+  public debug(message: any, ...optionalParams: any[]): void {
+    // Log it if the console is available (won't be in all browsers)
+    if (console && console.debug) {
+      console.debug(message, optionalParams);
     }
   }
 }

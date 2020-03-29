@@ -20,7 +20,7 @@ export class EngineTest {
     const parser = new ParserService(null);
     const verbs = new VerbService();
     this.world = new WorldService();
-    this.service = new StoryService(parser, verbs, this.world);
+    this.service = new StoryService(parser, verbs, this.world, null);
   }
 
   public get state(): GameWorld {

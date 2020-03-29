@@ -2,6 +2,7 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
 import {StoryEntry} from '../Model/StoryEntry';
 import {StoryEntryType} from '../Model/StoryEntryType';
+import {AnalyticsService} from './analytics.service';
 import {ParserService} from './parser.service';
 import {VerbService} from './verb.service';
 import {WorldService} from './world.service';
@@ -16,7 +17,8 @@ export class StoryService {
 
   constructor(private parser: ParserService,
               private verbs: VerbService,
-              private world: WorldService) {
+              private world: WorldService,
+              private analytics: AnalyticsService) {
   }
 
   public get initialEntries(): StoryEntry[] {
@@ -67,12 +69,18 @@ export class StoryService {
     // Find a verb handler for the verb
     const handler = this.verbs.getHandler(context.sentence.verb);
 
+    let isValid = false;
+
     if (handler) {
       // Invoke the verb handler
-      handler(context);
+      isValid = handler(context);
     } else {
       // Add a generic response saying that the verb is not supported
       context.addSystem( `You can't ${context.sentence.verb} in this game.`);
+    }
+
+    if (this.analytics) {
+      this.analytics.logPlayerText(context.sentence.text, context.currentRoomName, isValid);
     }
   }
 }

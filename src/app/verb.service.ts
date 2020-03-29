@@ -8,18 +8,19 @@ import {objectResponse} from '../Model/World/GameObject';
 })
 export class VerbService {
 
-  private static handleVerb(context: CommandContext, verbName: string, nonTargetedResponse: string, genericResponse: string): void {
+  private static handleVerb(context: CommandContext, verbName: string, nonTargetedResponse: string, genericResponse: string): boolean {
     context.checkVerb(verbName);
 
     const target = context.sentence.target;
     if (target) {
-      this.handleTargetedVerb(verbName, target, context, genericResponse);
+      return this.handleTargetedVerb(verbName, target, context, genericResponse);
     } else {
       context.addText(nonTargetedResponse);
+      return true;
     }
   }
 
-  private static handleTargetedVerb(verbName: string, target: Word, context: CommandContext, genericResponse: string) {
+  private static handleTargetedVerb(verbName: string, target: Word, context: CommandContext, genericResponse: string): boolean {
     const gameObject = target.gameObject;
     if (gameObject) {
       const handler: objectResponse = gameObject[verbName];
@@ -36,90 +37,96 @@ export class VerbService {
       } else {
         context.addText(genericResponse);
       }
+      return true;
     } else {
       context.addDontSee(target);
+      return false;
     }
   }
 
-  public handleLook(context: CommandContext): void {
+  public handleLook(context: CommandContext): boolean {
     context.checkVerb('look');
     const target = context.sentence.target;
     if (target) {
-      VerbService.handleTargetedVerb('look', target, context, `The ${target.reduced} is pretty much as you'd expect.`);
+      return VerbService.handleTargetedVerb('look', target, context, `The ${target.reduced} is pretty much as you'd expect.`);
     } else {
       context.describeCurrentRoom(true);
+      return true;
     }
   }
 
-  public handleEat(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handleEat(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'eat',
       `If you want to eat something, you'll need to say what you want to eat. Try saying 'eat the kibble' or similar.`,
       `On second thought, it doesn't look all that tasty.`);
   }
 
-  public handlePush(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handlePush(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'push',
       `You can't push nothing. Try saying 'push the crate' or similar.`,
       `Pushing it doesn't result in anything interesting.`);
   }
 
-  public handleListen(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handleListen(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'listen',
       `You stop everything and listen. A few moments pass, but you don't hear anything interesting.`,
       `It doesn't seem to be making many sound at the moment.`);
   }
 
-  public handleSmell(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handleSmell(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'smell',
       `You take a quick mix of shallow and deep sniffs in, but don't smell anything surprising.`,
       `It's smell isn't very surprising or interesting.`);
   }
 
-  public handleThinkAbout(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handleThinkAbout(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'think',
       `You do some thinking and feel like you still have the wiggles. Time to roam the house and make a mess!`,
       `You stare at it and think, but nothing interesting comes to mind. You find yourself suddenly wanting to destroy things.`);
   }
 
-  public handleGo(context: CommandContext): void {
+  public handleGo(context: CommandContext): boolean {
     context.checkVerb('go');
 
     const target = context.sentence.target;
     if (!target) {
       context.addError(`You need to say which way you want to go. For example, try 'go to the north' or 'go west'`);
+      return false;
     } else if (target.room !== undefined && target.room !== context.currentRoom) {
       context.changeRoom(target.room, target.text);
+      return true;
     } else {
       context.addError(`You can't go that way`);
+      return false;
     }
   }
 
-  public handleBark(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handleBark(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'bark',
       `You tilt your head back and bark loudly at the entire world. The world ignores you.`,
       `You glare at it and give it your fiercest bark. It makes no move in response. It must be scared.`);
   }
 
-  public handleGet(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handleGet(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'take',
       `Try tying what you'd like to get, for example 'Get blanket'.`,
       `You can't take that with you, sadly.`);
   }
-  public handleTaste(context: CommandContext): void {
-    VerbService.handleVerb(context,
+  public handleTaste(context: CommandContext): boolean {
+    return VerbService.handleVerb(context,
       'lick',
       `Try tying what you'd like to lick, for example 'Lick the chair'.`,
       `You\'ve licked that before when you were puppy and don\'t want to repeat the experience.`);
   }
 
-  public getHandler(verb: string): (context: CommandContext) => void | undefined {
+  public getHandler(verb: string): (context: CommandContext) => boolean | undefined {
     switch (verb) {
       case 'eat':
         return this.handleEat.bind(this);

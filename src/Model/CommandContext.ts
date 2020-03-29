@@ -16,6 +16,11 @@ export class CommandContext {
     return this.world.currentRoom;
   }
 
+  public get currentRoomName(): string {
+    const gameRoom = this.world.getRoom(this.world.currentRoom);
+    return gameRoom.displayName;
+  }
+
   public describeCurrentRoom(isFullDescribe: boolean): void {
     const gameRoom = this.world.getRoom(this.world.currentRoom);
 

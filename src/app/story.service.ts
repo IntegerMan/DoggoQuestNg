@@ -53,6 +53,7 @@ export class StoryService {
     if (validationResult) {
       // If the player said something we couldn't figure out, show that error response
       context.addError(validationResult);
+      this.analytics.logPlayerText(text, context.currentRoomName, false);
     } else {
       this.handleCommand(context);
     }

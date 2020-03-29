@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {CommandContext} from '../Model/CommandContext';
 import {Word} from '../Model/Parsing/Word';
-import {objectResponse} from '../Model/World/GameObject';
+import {objectResponse} from '../Model/World/Objects/GameObject';
 
 @Injectable({
   providedIn: 'root'
@@ -113,6 +113,11 @@ export class VerbService {
       `You glare at it and give it your fiercest bark. It makes no move in response. It must be scared.`);
   }
 
+  public handleDebug(context: CommandContext): boolean {
+    context.addLocalObjects();
+    return false;
+  }
+
   public handleGet(context: CommandContext): boolean {
     return VerbService.handleVerb(context,
       'take',
@@ -166,6 +171,8 @@ export class VerbService {
       case 'get':
       case 'take':
         return this.handleGet.bind(this);
+      case 'debug':
+        return this.handleDebug.bind(this);
       default:
         return undefined;
     }

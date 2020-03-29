@@ -1,19 +1,12 @@
 import {CommandContext} from '../../CommandContext';
-import {GameObject} from '../GameObject';
+import {CrateObject} from '../Objects/CrateObject';
+import {GameObject} from '../Objects/GameObject';
 import {Room} from '../Room';
 import {RoomBase} from './RoomBase';
 
 export class Office extends RoomBase {
   objects: GameObject[] = [
-    {
-      name: 'crate',
-      look: `It's your crate. You don't like it, but you can go back in it if you want by going south.`,
-      eat: 'Yuck. No thank you.',
-      push: `The crate is fine where it is and you don't want to shut the door to it either.`,
-      smell: `To really smell the crate, you need to be inside it.`,
-      take: `It's too big to pull along with you. Besides, it's fine where it is.`,
-      lick: `You'd have to do that from inside the crate.`
-    },
+    new CrateObject(false),
     {
       name: 'chair',
       look: context1 =>  {

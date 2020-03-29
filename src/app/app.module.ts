@@ -20,6 +20,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import { StoryEntryComponent } from './story-entry/story-entry.component';
 import { WordComponent } from './word/word.component';
+import { ObjectListComponent } from './object-list/object-list.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { WordComponent } from './word/word.component';
     StoryTextComponent,
     StoryEntryComponent,
     WordComponent,
+    ObjectListComponent,
   ],
   imports: [
     BrowserModule,

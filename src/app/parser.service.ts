@@ -121,8 +121,8 @@ export class ParserService {
 
   private adjustTags(word: Word): void {
 
-    const verbs = ['bark', 'roo', 'arf', 'yip', 'open', 'growl', 'howl'];
-    const nouns = ['crate'];
+    const verbs = ['bark', 'roo', 'arf', 'yip', 'open', 'growl', 'howl', 'sniff', 'debug'];
+    const nouns = ['crate', 'objects', 'object'];
     const preps = ['on', 'under', 'below', 'behind', 'above'];
     const directions = ['north', 'south', 'east', 'west', 'up', 'down', 'in', 'out'];
 

@@ -1,4 +1,4 @@
-import {GameObject} from '../World/GameObject';
+import {GameObject} from '../World/Objects/GameObject';
 import {GameRoom} from '../World/GameRoom';
 import {Room} from '../World/Room';
 

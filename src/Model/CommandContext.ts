@@ -16,9 +16,12 @@ export class CommandContext {
     return this.world.currentRoom;
   }
 
+  public get currentRoomObject(): GameRoom {
+    return this.world.getRoom(this.world.currentRoom);
+  }
+
   public get currentRoomName(): string {
-    const gameRoom = this.world.getRoom(this.world.currentRoom);
-    return gameRoom.displayName;
+    return this.currentRoomObject.displayName;
   }
 
   public describeCurrentRoom(isFullDescribe: boolean): void {
@@ -60,31 +63,38 @@ export class CommandContext {
   }
 
   public addPlayerCommand(): void {
-    this.entries.push(new StoryEntry(StoryEntryType.PlayerCommand, this.sentence.text, this.sentence));
+    this.entries.push(new StoryEntry(StoryEntryType.PlayerCommand, this.sentence.text, this.sentence, this.currentRoomObject));
   }
 
   public addText(message: string): void {
-    this.entries.push(new StoryEntry(StoryEntryType.StoryNarrative, message, this.sentence));
+    this.entries.push(new StoryEntry(StoryEntryType.StoryNarrative, message, this.sentence, this.currentRoomObject));
   }
 
   public addRoomName(message: string): void {
-    this.entries.push(new StoryEntry(StoryEntryType.RoomName, message, this.sentence));
+    this.entries.push(new StoryEntry(StoryEntryType.RoomName, message, this.sentence, this.currentRoomObject));
   }
 
   public addError(message: string): void {
-    this.entries.push(new StoryEntry(StoryEntryType.CommandError, message, this.sentence));
+    this.entries.push(new StoryEntry(StoryEntryType.CommandError, message, this.sentence, this.currentRoomObject));
   }
 
   public addSystem(message: string): void {
-    this.entries.push(new StoryEntry(StoryEntryType.SystemText, message, this.sentence));
+    this.entries.push(new StoryEntry(StoryEntryType.SystemText, message, this.sentence, this.currentRoomObject));
   }
 
   public addDontSee(target: Word): void {
-    this.entries.push(new StoryEntry(StoryEntryType.CommandError, `You don't see a ${target.reduced} here.`, this.sentence));
+    this.entries.push(new StoryEntry(StoryEntryType.CommandError,
+      `You don't see a ${target.reduced} here.`,
+      this.sentence,
+      this.currentRoomObject));
   }
 
   public increaseScore(amount: number): void {
     this.addSystem(`Your score has gone up by ${amount}`);
     this.world.score += amount;
+  }
+
+  public addLocalObjects(): void {
+    this.entries.push(new StoryEntry(StoryEntryType.ObjectList, 'Objects in this room', this.sentence, this.currentRoomObject));
   }
 }

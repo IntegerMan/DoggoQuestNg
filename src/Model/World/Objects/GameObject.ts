@@ -1,4 +1,4 @@
-import {CommandContext} from '../CommandContext';
+import {CommandContext} from '../../CommandContext';
 
 export type objectResponse = ((context: CommandContext) => void) | string;
 

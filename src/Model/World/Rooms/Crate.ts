@@ -1,5 +1,6 @@
 import {CommandContext} from '../../CommandContext';
-import {GameObject} from '../GameObject';
+import {CrateObject} from '../Objects/CrateObject';
+import {GameObject} from '../Objects/GameObject';
 import {Room} from '../Room';
 import {RoomBase} from './RoomBase';
 
@@ -52,13 +53,8 @@ export class Crate extends RoomBase {
         take: 'You really should leave it in your crate. The crate is uncomfortable to lay down in without a nice soft blanket',
         lick: 'It\'s not that interesting to taste. You lick it sometimes while you sleep in your crate, but it just tastes like blanket.'
       },
-      {
-        name: 'crate',
-        look: 'The crate is big enough for you to fit comfortably in and not too much bigger. You do not like it in here.',
-        smell: 'It smells like you!',
-        push: 'The crate rocks slightly, but not significantly. Maybe try pushing the door instead?',
-        lick: 'It\'s plastic and boring. I don\'t want to lick that.'
-      }];
+      new CrateObject(true)
+    ];
   }
 
   describe(context: CommandContext): void {

@@ -1,10 +1,10 @@
 import {CommandContext} from '../../CommandContext';
 import {GameObject} from '../GameObject';
-import {ChairObject} from '../Objects/ChairObject';
-import {CrateObject} from '../Objects/CrateObject';
+import {ChairObject} from './ChairObject';
+import {CrateObject} from './CrateObject';
 import {Room} from '../Room';
 import {RoomBase} from '../RoomBase';
-import {WindowObject} from '../Objects/WindowObject';
+import {WindowObject} from './WindowObject';
 
 export class Office extends RoomBase {
   objects: GameObject[] = [
@@ -23,7 +23,8 @@ export class Office extends RoomBase {
   }
 
   describe(context: CommandContext): void {
-    context.addText(`The office contains your crate to the south as well as a rocking chair overlooking a window to the outside.`);
+    context.addText(`The office is a small area where mommy likes to do some of her work. She's not here, so the only things of interest ` +
+      `are your crate to the south and as a rocking chair overlooking a window.`);
     context.addText(`The rest of the house is to the east.`);
   }
 }

@@ -16,6 +16,8 @@ export class Dining extends RoomBase {
   }
 
   describe(context: CommandContext): void {
-    context.addText(`This is the dining room`);
+    context.addText(`This is the dining room. I like to beg at the table when mommy and daddy eat, but I usually have to eat out of my ` +
+      `food bowl instead.`);
+    context.addText(`The kitchen is to the west and the living room is to the west. The hall goes north to the entryway.`);
   }
 }

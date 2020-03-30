@@ -17,7 +17,7 @@ export class Entryway extends RoomBase {
 
   describe(context: CommandContext): void {
     context.addText(`You're in the entryway at the front of the house. A large door leads outside while the office is to the west and a ` +
-      `hallway leads south to the dining room.`);
+      `hallway leads south to the dining room and living area.`);
     context.addText(`Stairs lead up, but are blocked by a menacing gate that frequently falls on you if you get near it.`);
   }
 }

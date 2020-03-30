@@ -16,6 +16,8 @@ export class LivingRoom extends RoomBase {
   }
 
   describe(context: CommandContext): void {
-    context.addText(`This is the living room`);
+    context.addText(`This is where mommy and daddy spend most of their time when they're home. They call it the living room, but it's ` +
+      `really just a big room with a couch, a table, a TV, and my toy box.`);
+    context.addText(`The dining room is back to the west, and sometimes I like to go inside the couch and rest there.`);
   }
 }

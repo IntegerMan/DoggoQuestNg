@@ -12,6 +12,8 @@ export class UnderCouch extends RoomBase {
   }
 
   describe(context: CommandContext): void {
-    context.addText(`This is the living room, only under the couch`);
+    context.addText(`This is my own personal den underneath the couch. Mommy doesn't like it when I go here, but it's dark and quiet ` +
+      `and a good place to rest before I'm ready to go back out to the living room.`);
+    context.addText(`It's hard to see anything in here. If something is here, I'll have to sniff for it.`);
   }
 }

@@ -14,6 +14,9 @@ export class Kitchen extends RoomBase {
   }
 
   describe(context: CommandContext): void {
-    context.addText(`This is the kitchen`);
+    context.addText(`The kitchen is an amazing place. Mommy cooks food here sometimes and will sometimes give me a crumb or two. ` +
+      `Sometimes I can also find crumbs on the floor if I sniff around for them.`);
+    context.addText(`The rest of the house is to the east.`);
+    context.addText(`A trashcan and my water bowl are here.`);
   }
 }

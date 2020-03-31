@@ -23,6 +23,27 @@ export class WorldService {
     return this.world;
   }
 
+  private findMatchForNoun(objects: GameObject[], reduced: string): GameObject | null {
+    for (const obj of objects) {
+      // If this object is a direct match, use it
+      if (obj.matches(reduced)) {
+        return obj;
+      }
+
+      // If it has children, we'll need to recursively check them
+      if (obj.children) {
+        const childResult = this.findMatchForNoun(obj.children, reduced);
+        if (childResult) {
+          return childResult;
+        }
+      }
+    }
+
+    // Okay, no match. Let's return null to indicate no object mapped
+    return null;
+  }
+
+
   public mapNouns(context: CommandContext): void {
     const currentRoom = this.state.getRoom(context.currentRoom);
 
@@ -38,7 +59,7 @@ export class WorldService {
     }
 
     for (const noun of context.sentence.rootWords.filter(w => w.isNoun)) {
-      const target: GameObject = currentRoom.objects.find(o => o.name === noun.reduced);
+      const target: GameObject = this.findMatchForNoun(currentRoom.objects, noun.reduced);
       noun.gameObject = target;
       if (this.logger) {
         this.logger.log(`Mapped noun ${noun.text}`, target);

@@ -14,4 +14,9 @@ export abstract class GameObjectBase implements GameObject {
     eat: objectResponse;
     lick: objectResponse;
     think: objectResponse;
+    children: GameObject[] = [];
+
+  matches(reduced: string): boolean {
+    return reduced === this.name; // TODO: Check aliases as well
+  }
 }

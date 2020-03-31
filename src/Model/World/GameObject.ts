@@ -11,4 +11,7 @@ export interface GameObject {
   eat: objectResponse;
   take: objectResponse;
   think: objectResponse;
+  children: GameObject[];
+
+  matches(reduced: string): boolean;
 }

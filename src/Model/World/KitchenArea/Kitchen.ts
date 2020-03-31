@@ -1,5 +1,6 @@
 import {CommandContext} from '../../CommandContext';
 import {GameObject} from '../GameObject';
+import {PlaceholderObject} from '../PlaceholderObject';
 import {Room} from '../Room';
 import {RoomBase} from '../RoomBase';
 
@@ -10,7 +11,12 @@ export class Kitchen extends RoomBase {
 
   constructor() {
     super('Kitchen', Room.Kitchen);
-    this.objects = [];
+    this.objects = [
+      new PlaceholderObject('crumb'),
+      new PlaceholderObject('floor'),
+      new PlaceholderObject('trashcan'),
+      new PlaceholderObject('bowl'),
+    ];
   }
 
   describe(context: CommandContext): void {

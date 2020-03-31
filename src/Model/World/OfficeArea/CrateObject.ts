@@ -1,4 +1,6 @@
 import {GameObjectBase} from '../GameObjectBase';
+import {BlanketObject} from './BlanketObject';
+import {CrateDoorObject} from './CrateDoorObject';
 
 export class CrateObject extends GameObjectBase {
   constructor(private inCrate: boolean)  {
@@ -13,6 +15,11 @@ export class CrateObject extends GameObjectBase {
       this.push = `The crate is fine where it is and you don't want to shut the door to it either.`;
       this.smell = `To really smell the crate, you need to be inside it.`;
     }
+
+    this.children = [
+      new CrateDoorObject(inCrate),
+      new BlanketObject(),
+    ];
 
     this.take = `It's too big to pull along with you. Besides, it's fine where it is.`;
     this.eat = 'Yuck. No thank you.';

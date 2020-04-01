@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GameRoom} from '../../Model/World/GameRoom';
+import {GameObject} from '../../Model/World/GameObject';
 
 @Component({
   selector: 'app-object-list',
@@ -9,7 +9,7 @@ import {GameRoom} from '../../Model/World/GameRoom';
 export class ObjectListComponent implements OnInit {
 
   @Input()
-  Room: GameRoom;
+  Objects: GameObject[];
 
   constructor() { }
 

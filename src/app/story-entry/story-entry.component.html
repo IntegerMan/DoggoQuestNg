@@ -1,7 +1,7 @@
 <div [ngSwitch]="Entry.EntryType">
   <app-story-text *ngSwitchCase="Entries.StoryNarrative" [Text]="Entry.Text"></app-story-text>
   <app-player-command *ngSwitchCase="Entries.PlayerCommand" [Text]="Entry.Text" [Sentence]="Entry.Sentence"></app-player-command>
-  <app-object-list *ngSwitchCase="Entries.ObjectList" [Room]="Entry.Room"></app-object-list>
+  <app-object-list *ngSwitchCase="Entries.ObjectList" [Objects]="Entry.Room.objects"></app-object-list>
   <p *ngSwitchCase="Entries.SystemText" class="text-system">{{Entry.Text}}</p>
   <p *ngSwitchCase="Entries.RoomName" class="text-room-name">{{Entry.Text}}</p>
   <mat-divider *ngSwitchCase="Entries.Divider"></mat-divider>

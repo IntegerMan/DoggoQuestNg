@@ -1,4 +1,6 @@
-<p>Objects Present:</p>
 <ul>
-  <li *ngFor="let obj of Room.objects">{{obj.name}}</li>
+  <li *ngFor="let obj of Objects">
+    {{obj.name}}
+    <app-object-list [Objects]="obj.children"></app-object-list>
+  </li>
 </ul>

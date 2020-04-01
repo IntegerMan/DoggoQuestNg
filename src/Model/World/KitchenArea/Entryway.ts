@@ -1,16 +1,14 @@
 import {CommandContext} from '../../CommandContext';
 import {GameObject} from '../GameObject';
-import {PlaceholderObject} from '../PlaceholderObject';
 import {Room} from '../Room';
 import {RoomBase} from '../RoomBase';
+import {HallwayObject} from './HallwayObject';
+import {OfficeObject} from './OfficeObject';
 
 export class Entryway extends RoomBase {
   objects: GameObject[] = [
-    new PlaceholderObject('door'),
-    new PlaceholderObject('hallway'),
-    new PlaceholderObject('stairs'),
-    new PlaceholderObject('gate'),
-    new PlaceholderObject('office'),
+    new HallwayObject(Room.Dining),
+    new OfficeObject(),
   ];
 
   south = Room.Dining;

@@ -1,8 +1,11 @@
 import {CommandContext} from '../../CommandContext';
 import {GameObject} from '../GameObject';
-import {PlaceholderObject} from '../PlaceholderObject';
 import {Room} from '../Room';
 import {RoomBase} from '../RoomBase';
+import {DiningObject} from './DiningObject';
+import {HallwayObject} from './HallwayObject';
+import {KitchenObject} from './KitchenObject';
+import {LivingRoomObject} from './LivingRoomObject';
 
 export class Dining extends RoomBase {
   objects: GameObject[];
@@ -14,15 +17,10 @@ export class Dining extends RoomBase {
   constructor() {
     super('Dining Room', Room.Dining);
     this.objects = [
-      new PlaceholderObject('table'),
-      new PlaceholderObject('chair'),
-      new PlaceholderObject('door'),
-      new PlaceholderObject('window'),
-      new PlaceholderObject('outside'),
-      new PlaceholderObject('bowl'),
-      new PlaceholderObject('kitchen'),
-      new PlaceholderObject('hall'),
-      new PlaceholderObject('livingroom'),
+      new DiningObject(Room.Dining),
+      new KitchenObject(Room.Dining),
+      new HallwayObject(Room.Dining),
+      new LivingRoomObject(Room.Dining),
     ];
   }
 

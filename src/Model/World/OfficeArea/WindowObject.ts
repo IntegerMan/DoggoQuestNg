@@ -1,9 +1,14 @@
 import {GameObjectBase} from '../GameObjectBase';
 import {Room} from '../Room';
+import {OutsideObject} from './OutsideObject';
 
 export class WindowObject extends GameObjectBase {
     constructor(private room: Room) {
         super('window');
+
+        this.children = [
+          new OutsideObject(room)
+        ];
 
         switch (this.room) {
           case Room.Office:

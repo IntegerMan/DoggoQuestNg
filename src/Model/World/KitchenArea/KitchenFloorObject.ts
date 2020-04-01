@@ -1,4 +1,5 @@
 import {GameObjectBase} from '../GameObjectBase';
+import {Room} from '../Room';
 import {CrumbObject} from './CrumbObject';
 import {TrashcanObject} from './TrashcanObject';
 import {BowlObject} from './BowlObject';
@@ -10,7 +11,7 @@ export class KitchenFloorObject extends GameObjectBase {
         this.children = [
             new CrumbObject(),
             new TrashcanObject(),
-            new BowlObject(),
+            new BowlObject(Room.Kitchen),
         ];
     }
 }

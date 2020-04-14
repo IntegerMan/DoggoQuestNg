@@ -1,5 +1,5 @@
-import {Sentence} from '../../Model/Parsing/Sentence';
 import {Component, Input, OnInit} from '@angular/core';
+import { Sentence } from 'doggo-quest-logic/dist/Parsing/Sentence';
 
 @Component({
   selector: 'app-player-command',

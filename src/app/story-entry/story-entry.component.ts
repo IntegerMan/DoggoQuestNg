@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {StoryEntry} from '../../Model/StoryEntry';
-import {StoryEntryType} from '../../Model/StoryEntryType';
+import { StoryEntry } from 'doggo-quest-logic/dist/StoryEntry';
+import { StoryEntryType } from 'doggo-quest-logic/dist/StoryEntryType';
 
 @Component({
   selector: 'app-story-entry',

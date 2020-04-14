@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {GameWorld} from '../Model/World/GameWorld';
+import { GameWorld } from 'doggo-quest-logic/dist/World/GameWorld';
 
 @Injectable({
   providedIn: 'root'

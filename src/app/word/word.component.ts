@@ -1,5 +1,5 @@
-import {Word} from '../../Model/Parsing/Word';
 import {Component, Input, OnInit} from '@angular/core';
+import { Word } from 'doggo-quest-logic/dist/Parsing/Word';
 
 @Component({
   selector: 'app-word',

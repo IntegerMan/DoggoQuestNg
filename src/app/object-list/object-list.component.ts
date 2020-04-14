@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {GameObject} from '../../Model/World/GameObject';
+import { GameObject } from 'doggo-quest-logic/dist/World/GameObject';
 
 @Component({
   selector: 'app-object-list',

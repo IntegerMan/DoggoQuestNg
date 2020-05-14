@@ -1,5 +1,7 @@
 # Doggo Quest
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7df073a7-4a0e-45aa-baf9-d961bad1fdd8/deploy-status)](https://app.netlify.com/sites/cocky-sinoussi-f768e1/deploys)
+
 Doggo Quest is small an Angular Interactive Fiction game created by [Matt Eland](https://twitter.com/integerman) as a teaching exercise to discuss various topics:
 
 - [Event Modeling](https://killalldefects.com/2020/02/01/game-design-with-event-modeling/)

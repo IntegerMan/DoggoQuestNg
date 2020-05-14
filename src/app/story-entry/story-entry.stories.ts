@@ -1,48 +1,66 @@
-import {select, text, withKnobs} from '@storybook/addon-knobs';
-import {moduleMetadata, storiesOf} from '@storybook/angular';
-import {StoryEntry} from '../../Model/StoryEntry';
-import {StoryEntryType} from '../../Model/StoryEntryType';
-import {AppModule} from '../app.module';
-import {StoryEntryComponent} from './story-entry.component';
-import { withA11y } from '@storybook/addon-a11y';
+import { select, text, withKnobs } from "@storybook/addon-knobs";
+import { moduleMetadata, storiesOf } from "@storybook/angular";
+import { AppModule } from "../app.module";
+import { StoryEntryComponent } from "./story-entry.component";
+import { withA11y } from "@storybook/addon-a11y";
+import { StoryEntry } from "doggo-quest-logic/dist/StoryEntry";
+import { StoryEntryType } from "doggo-quest-logic/dist/StoryEntryType";
 
-storiesOf('StoryEntry', module)
-  .addDecorator(moduleMetadata({ imports: [ AppModule ]}))
+storiesOf("StoryEntry", module)
+  .addDecorator(moduleMetadata({ imports: [AppModule] }))
   .addDecorator(withKnobs)
   .addDecorator(withA11y)
-  .add('Configurable', () => ({
+  .add("Configurable", () => ({
     component: StoryEntryComponent,
     props: {
-      Entry: new StoryEntry(select<StoryEntryType>('Type',
-        {Error: StoryEntryType.CommandError,
-                System: StoryEntryType.SystemText,
-                Narrative: StoryEntryType.StoryNarrative,
-                Command: StoryEntryType.PlayerCommand},
-        StoryEntryType.SystemText),
-        text('Text', 'This is the text of the entry'))
-    },
+      Entry: new StoryEntry(
+        select<StoryEntryType>(
+          "Type",
+          {
+            Error: StoryEntryType.CommandError,
+            System: StoryEntryType.SystemText,
+            Narrative: StoryEntryType.StoryNarrative,
+            Command: StoryEntryType.PlayerCommand
+          },
+          StoryEntryType.SystemText
+        ),
+        text("Text", "This is the text of the entry")
+      )
+    }
   }))
-  .add('PlayerCommand', () => ({
+  .add("PlayerCommand", () => ({
     component: StoryEntryComponent,
     props: {
-      Entry: new StoryEntry(StoryEntryType.PlayerCommand, 'This is a player command')
-    },
+      Entry: new StoryEntry(
+        StoryEntryType.PlayerCommand,
+        "This is a player command"
+      )
+    }
   }))
-  .add('SystemText', () => ({
+  .add("SystemText", () => ({
     component: StoryEntryComponent,
     props: {
-      Entry: new StoryEntry(StoryEntryType.SystemText, 'This is some System Text')
-    },
+      Entry: new StoryEntry(
+        StoryEntryType.SystemText,
+        "This is some System Text"
+      )
+    }
   }))
-  .add('Error', () => ({
+  .add("Error", () => ({
     component: StoryEntryComponent,
     props: {
-      Entry: new StoryEntry(StoryEntryType.CommandError, 'This is an error or warning message')
-    },
+      Entry: new StoryEntry(
+        StoryEntryType.CommandError,
+        "This is an error or warning message"
+      )
+    }
   }))
-  .add('StoryNarrative', () => ({
+  .add("StoryNarrative", () => ({
     component: StoryEntryComponent,
     props: {
-      Entry: new StoryEntry(StoryEntryType.StoryNarrative, 'This is story narrative')
-    },
+      Entry: new StoryEntry(
+        StoryEntryType.StoryNarrative,
+        "This is story narrative"
+      )
+    }
   }));
